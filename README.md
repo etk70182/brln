@@ -1,2 +1,2 @@
-# brln
-Open Source Synthesizer
+# BRLN
+## Open Source Synthesizer
