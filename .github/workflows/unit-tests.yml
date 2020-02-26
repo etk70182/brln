@@ -24,7 +24,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Make Build Directory
-      run: mkdir -p build; cd build
+      run: mkdir -p build
     - name: Change to Build Directory
       run: cd build
     - name: CMake Configuration
