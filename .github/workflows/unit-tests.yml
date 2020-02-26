@@ -12,8 +12,7 @@ jobs:
     
     steps:
     - name: Install CppUTest
-      run: apt-get update -y
-      run: apt-get install -y cpputest
+      run: apt-get update -y; apt-get install -y cpputest
 
   build:
     name: Build Stage
