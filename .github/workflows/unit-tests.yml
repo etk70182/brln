@@ -6,6 +6,15 @@ on:
     - feature_branch
 
 jobs:
+  before-script:
+    name: Setup
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Install CppUTest
+      run: apt-get update -y
+      run: apt-get install -y cpputest
+
   build:
     name: Build Stage
     runs-on: ubuntu-latest
