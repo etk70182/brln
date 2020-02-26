@@ -25,12 +25,12 @@ jobs:
     - uses: actions/checkout@v2
     - name: Make Build Directory
       run: mkdir -p build
-    - name: Change to Build Directory
-      run: cd build
     - name: CMake Configuration
       run: cmake ..
+      working-directory: ./build
     - name: CMake Build
       run: cmake --build .
+      working-directory: ./build
       
   unittests:
     needs: [before-script, build]
