@@ -11,8 +11,6 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-    - name: Update Ubuntu
-      run: apt-get update -y
     - name: Install CppUTest
       run: apt-get install -y cpputest
 
