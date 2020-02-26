@@ -11,10 +11,13 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
+    - name: Update Ubuntu
+      run: apt-get update -y
     - name: Install CppUTest
-      run: apt-get update -y; apt-get install -y cpputest
+      run: apt-get install -y cpputest
 
   build:
+    needs: before-script
     name: Build Stage
     runs-on: ubuntu-latest
     
@@ -28,6 +31,7 @@ jobs:
       run: cmake --build .
       
   unittests:
+    needs: [before-script, build]
     name: Unit Test Stage
     runs-on: ubuntu-latest
 
