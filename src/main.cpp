@@ -1,15 +1,18 @@
-/*
- * main.cpp
- *
- *  Created on: Sep 14, 2019
- *      Author: André Schlinke
- */
+#include "sum_integers.hpp"
 
 #include <iostream>
-#include "Template/Template.h"
+#include <string>
+#include <vector>
 
-int main()
-{
-  std::cout << "Hello World!\n";
+// we assume all arguments are integers and we sum them up
+// for simplicity we do not verify the type of arguments
+int main(int argc, char *argv[]) {
+
+  std::vector<int> integers;
+  for (auto i = 1; i < argc; i++) {
+    integers.push_back(std::stoi(argv[i]));
+  }
+  auto sum = sum_integers(integers);
+
+  std::cout << sum << std::endl;
 }
-

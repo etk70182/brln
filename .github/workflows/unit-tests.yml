@@ -1,4 +1,4 @@
-name: C/C++ CI
+name: CI Workflow Playground
 
 on:
   push:
@@ -6,21 +6,12 @@ on:
     - feature_branch
 
 jobs:
-  before-script:
-    name: Setup
-    runs-on: ubuntu-latest
-    
-    steps:
-    - name: Update Ubuntu
-      run: sudo apt-get update -y
-    - name: Install CppUTest
-      run: sudo apt-get install -y cpputest
-
   build:
-    needs: before-script
     name: Build Stage
-    runs-on: ubuntu-latest
-    
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [windows-latest, macos-latest, ubuntu-latest]
     steps:
     - uses: actions/checkout@v2
     - name: Make Build Directory
@@ -31,12 +22,14 @@ jobs:
     - name: CMake Build
       run: cmake --build .
       working-directory: ./build
-      
-  unittests:
-    needs: [before-script, build]
-    name: Unit Test Stage
-    runs-on: ubuntu-latest
 
+  unittest:
+    needs: [build]
+    name: Unit Test Stage
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [windows-latest, macos-latest, ubuntu-latest]
     steps:
     - name: Unit Test
       run: ctest

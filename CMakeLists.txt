@@ -1,21 +1,28 @@
-# (1) CMake definitions, compiler flags and useful variables
-cmake_minimum_required(VERSION 3.7)
-project(brln)
+# set minimum cmake version
+cmake_minimum_required(VERSION 3.5 FATAL_ERROR)
 
-SET(CMAKE_C_COMPILER /usr/bin/gcc-7)
-SET(CMAKE_CXX_COMPILER /usr/bin/g++-7)
+# project name and language
+project(brln LANGUAGES CXX)
 
-add_compile_options(-Wall -Werror -Wpedantic)
+# require C++11
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_EXTENSIONS OFF)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-set(APP_NAME brln)
-set(APP_LIB_NAME Template)
+set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
 
-# (2) Include application build instructions
+set(PROJECT_ROOT_DIR ${CMAKE_CURRENT_LIST_DIR})
+set(PROJECT_INCLUDE_DIR ${PROJECT_ROOT_DIR}/include)
+
+# example library
 add_subdirectory(src)
 
-# (3) include tests build instructions   
-option(COMPILE_TESTS "Compile the tests" ON)
-if(COMPILE_TESTS)
+# we will use the network to fetch Google Test sources
+# make it possible to disable unit tests when not on network
+option(ENABLE_UNIT_TESTS "Enable unit tests" ON)
+message(STATUS "Enable testing: ${ENABLE_UNIT_TESTS}")
+
+if(ENABLE_UNIT_TESTS)
   enable_testing()
-  add_subdirectory(tests)
-endif(COMPILE_TESTS)
+  add_subdirectory(test)
+endif()
