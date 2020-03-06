@@ -17,14 +17,16 @@ ${libpd_BINARY_DIR}
 
 add_library(sum_integers sum_integers.cpp)
 
-target_include_directories(sum_integers PUBLIC ${PROJECT_INCLUDE_DIR}/Template)
-target_include_directories(sum_integers PUBLIC ${libpd_SOURCE_DIR}/cpp
-												${libpd_SOURCE_DIR}/pure-data/src
-												${libpd_SOURCE_DIR}/pure-data/extra
-												${libpd_SOURCE_DIR}/libpd_wrapper
-												${libpd_SOURCE_DIR}/libpd_wrapper/util)
+target_include_directories(sum_integers PUBLIC ${PROJECT_INCLUDE_DIR}/Template
+											   ${libpd_SOURCE_DIR}/cpp
+											   ${libpd_SOURCE_DIR}/pure-data/src
+											   ${libpd_SOURCE_DIR}/pure-data/extra
+											   ${libpd_SOURCE_DIR}/libpd_wrapper
+											   ${libpd_SOURCE_DIR}/libpd_wrapper/util)
+
+target_compile_definitions(sum_integers PUBLIC LIBPD_USE_STD_MUTEX)
 
 target_link_libraries(sum_integers
-PRIVATE
+PUBLIC
   libpd
 )

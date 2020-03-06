@@ -1,4 +1,4 @@
-name: CI Workflow Playground
+name: CI Unit Test Workflow
 
 on:
   push:
@@ -6,23 +6,6 @@ on:
     - feature_branch
 
 jobs:
-  build:
-    name: Build Stage
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [macos-latest, ubuntu-latest]
-    steps:
-    - uses: actions/checkout@v2
-    - name: Make Build Directory
-      run: mkdir -p build
-    - name: CMake Configuration
-      run: cmake ..
-      working-directory: ./build
-    - name: CMake Build
-      run: cmake --build .
-      working-directory: ./build
-
   unittest:
     needs: [build]
     name: Unit Test Stage
