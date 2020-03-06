@@ -15,10 +15,15 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Make Build Directory
-      run: mkdir -p build
+      run: mkdir build
     - name: CMake Configuration
       run: cmake ..
       working-directory: ./build
+      if: !startsWith(matrix.os 'windows')
+    - name: CMake Configuration
+      run: cmake CMAKE_THREAD_LIBS_INIT=./_deps/libpd-src/libs/libwinpthread-1.dll ..
+      working-directory: ./build
+      if: startsWith(matrix.os 'windows')
     - name: CMake Build
       run: cmake --build .
       working-directory: ./build
