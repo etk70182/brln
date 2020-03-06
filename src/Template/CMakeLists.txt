@@ -9,7 +9,12 @@ https://github.com/libpd/libpd.git
 ""
 )
 
-# adds the targers: gtest, gtest_main, gmock, gmock_main
+if (MSVC)
+    set(CMAKE_THREAD_LIBS_INIT ${PROJECT_ROOT_DIR}/libs/x64/pthreadVC2.lib CACHE STRING "Path to pthreads library")
+    set(PTHREADS_INCLUDE_DIR ${PROJECT_ROOT_DIR}/include/pthreads_win32/ CACHE STRING "Path to the pthreads library header files")
+endif ()
+
+# adds the targers: libpd_static, libpd
 add_subdirectory(
 ${libpd_SOURCE_DIR}
 ${libpd_BINARY_DIR}

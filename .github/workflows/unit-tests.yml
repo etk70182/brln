@@ -16,8 +16,8 @@ jobs:
     - uses: actions/checkout@v2
     - name: Make Build Directory
       run: mkdir build
-    - name: CMake Configuration for Win64
-      run: cmake -DCMAKE_THREAD_LIBS_INIT=../libs/x86/pthreadVC2.lib -DPTHREADS_INCLUDE_DIR=../include/pthreads_win32/ ..
+    - name: CMake Configuration
+      run: cmake ..
       working-directory: ./build
     - name: CMake Build
       run: cmake --build .
