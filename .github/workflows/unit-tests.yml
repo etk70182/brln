@@ -24,6 +24,7 @@ jobs:
       working-directory: ./build
     - name: CMake Build
       run: msys2do cmake --build .
+      working-directory: ./build
 
   unittest:
     needs: [build]
