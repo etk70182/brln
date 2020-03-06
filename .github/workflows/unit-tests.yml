@@ -20,8 +20,8 @@ jobs:
       run: cmake ..
       if: startsWith(matrix.os 'macos') || startsWith(matrix.os 'ubuntu')
       working-directory: ./build
-    - name: CMake Configuration
-      run: cmake CMAKE_THREAD_LIBS_INIT=./_deps/libpd-src/libs/libwinpthread-1.dll ..
+    - name: CMake Configuration for Win64
+      run: cmake CMAKE_THREAD_LIBS_INIT=./_deps/libpd-src/libs/mingw64/libwinpthread-1.dll ..
       if: startsWith(matrix.os 'windows')
       working-directory: ./build
     - name: CMake Build
