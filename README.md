@@ -1,5 +1,5 @@
 # BRLN
-[![Build](https://github.com/etk70182/brln/workflows/unit-tests.yml/badge.svg)](https://github.com/etk70182/brln/actions)
+![](https://github.com/etk70182/brln/workflows/CI%20Workflow%20Playground/badge.svg)
 ## Open Source Synthesizer
 
 Under construction...
