@@ -1,6 +1,5 @@
 # BRLN
-![](https://github.com/etk70182/brln/jobs/Build/badge.svg)
-![](https://github.com/etk70182/brln/jobs/Unit%20Testing/badge.svg)
+![](https://github.com/etk70182/brln/workflows/Build%20and%20Unit%20Testing/badge.svg)
 ## Open Source Synthesizer
 
 Under construction...
