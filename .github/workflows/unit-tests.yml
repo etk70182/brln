@@ -1,4 +1,4 @@
-name: CI Workflow Playground
+name: CI Workflow
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    name: Build Stage
+    name: Build
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -25,7 +25,7 @@ jobs:
 
   unittest:
     needs: [build]
-    name: Unit Test Stage
+    name: Unit Testing
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
