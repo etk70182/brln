@@ -3,7 +3,7 @@ name: CI Workflow Playground
 on:
   push:
     branches:
-    - feature_branch
+    - master
 
 jobs:
   build:
