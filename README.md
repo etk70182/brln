@@ -1,5 +1,5 @@
 # BRLN
-[![Build Status](https://travis-ci.org/etk70182/brln.svg?branch=master)](https://travis-ci.org/etk70182/brln)
+[![](https://github.com/etk70182/brln/.github/workflows/unit-tests.yml/badge.svg)](https://github.com/etk70182/brln/actionss?query=workflow%3Abuild+branch%3Afeature_branch)
 ## Open Source Synthesizer
 
 Under construction...
