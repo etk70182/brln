@@ -1,5 +1,5 @@
 # BRLN
-[![](https://github.com/etk70182/brln/.github/workflows/unit-tests.yml/badge.svg)](https://github.com/etk70182/brln/actionss?query=workflow%3Abuild+branch%3Afeature_branch)
+[![Build](https://github.com/etk70182/brln/workflows/unit-tests.yml/badge.svg)](https://github.com/etk70182/brln/actions)
 ## Open Source Synthesizer
 
 Under construction...
