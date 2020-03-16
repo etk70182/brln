@@ -5,8 +5,8 @@ include(${PROJECT_ROOT_DIR}/fetch_git_repo.cmake)
 fetch_git_repo(
 libpd
 ${CMAKE_BINARY_DIR}/_deps
-https://github.com/libpd/libpd.git
-""
+https://github.com/etk70182/libpd.git
+"brln"
 )
 
 if (MSVC)
