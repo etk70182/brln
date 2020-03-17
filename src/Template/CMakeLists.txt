@@ -9,11 +9,6 @@ https://github.com/etk70182/libpd.git
 "061a624785196f3f40a57cc4ad4b76eb02c14656"
 )
 
-if (MSVC)
-    set(CMAKE_THREAD_LIBS_INIT ${PROJECT_ROOT_DIR}/libs/x64/pthreadVC2.lib CACHE STRING "Path to pthreads library")
-    set(PTHREADS_INCLUDE_DIR ${PROJECT_ROOT_DIR}/include/pthreads_win32/ CACHE STRING "Path to the pthreads library header files")
-endif ()
-
 # adds the targers: libpd_static, libpd
 add_subdirectory(
 ${libpd_SOURCE_DIR}
