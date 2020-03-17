@@ -6,7 +6,7 @@ fetch_git_repo(
 libpd
 ${CMAKE_BINARY_DIR}/_deps
 https://github.com/etk70182/libpd.git
-"brln"
+"225553d2d5ca89db56e6a55b1011fb6861188ed3"
 )
 
 if (MSVC)
