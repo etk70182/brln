@@ -15,6 +15,7 @@ jobs:
       run: cpplint --recursive .
 
   build:
+    needs: [codecheck]
     name: Build Stage
     runs-on: ${{ matrix.os }}
     strategy:
@@ -32,7 +33,7 @@ jobs:
       working-directory: ./build
 
   unittest:
-    needs: [build]
+    needs: [codecheck, build]
     name: Unit Test Stage
     runs-on: ${{ matrix.os }}
     strategy:
