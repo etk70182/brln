@@ -1,11 +1,19 @@
-name: CI Workflow Playground
+name: Automated Tests
 
-on:
-  push:
-    branches:
-    - feature_branch
+on: [push, pull_request]
 
 jobs:
+  codecheck:
+    name: Code Check Stage
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - uses: actions/setup-python@v1
+    - name: Install cpplint
+      run: pip install cpplint
+    - name: Code Check
+      run: cpplint --recursive .
+
   build:
     name: Build Stage
     runs-on: ${{ matrix.os }}
