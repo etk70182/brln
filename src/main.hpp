@@ -18,7 +18,7 @@
  */
 #pragma once
 
+#include <iostream>
+#include <string>
 #include <vector>
-#include "PdBase.hpp"
-
-int sum_integers(const std::vector<int> integers);
+#include "sum_integers.hpp"

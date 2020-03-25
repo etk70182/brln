@@ -34,6 +34,7 @@ add_executable(cpp_test "")
 
 target_sources(cpp_test
 PRIVATE
+  test.hpp
   test.cpp
 )
 

@@ -19,6 +19,5 @@
 #pragma once
 
 #include <vector>
-#include "PdBase.hpp"
-
-int sum_integers(const std::vector<int> integers);
+#include "gtest/gtest.h"
+#include "sum_integers.hpp"
