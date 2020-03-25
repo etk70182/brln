@@ -16,7 +16,7 @@ jobs:
 
   build:
     needs: [codecheck]
-    name: Unit Test Stage
+    name: Build Stage
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -31,5 +31,15 @@ jobs:
     - name: CMake Build
       run: cmake --build .
       working-directory: ./build
+
+  unittest:
+    needs: [codecheck, build]
+    name: Unit Test Stage
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    steps:
     - name: Unit Test
       run: ctest
+      working-directory: ./build
