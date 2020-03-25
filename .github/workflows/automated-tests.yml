@@ -25,12 +25,12 @@ jobs:
     - uses: actions/checkout@v2
     - name: Make Build Directory
       run: mkdir build
-    - name: CMake Configuration
+    - name: Configuration
       run: cmake ..
       working-directory: ./build
-    - name: CMake Build
+    - name: Build
       run: cmake --build .
       working-directory: ./build
     - name: Unit Test
-      run: ctest
+      run: ctest -V
       working-directory: ./build

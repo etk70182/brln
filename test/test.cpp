@@ -18,11 +18,6 @@
  */
 #include "test.hpp"
 
-int main(int argc, char **argv) {
-  ::testing::InitGoogleTest(&argc, argv);
-  return RUN_ALL_TESTS();
-}
-
 TEST(example, sum_zero) {
   auto integers = {1, -1, 2, -2, 3, -3};
   auto result = sum_integers(integers);
