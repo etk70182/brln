@@ -14,6 +14,9 @@ set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
 set(PROJECT_ROOT_DIR ${CMAKE_CURRENT_LIST_DIR})
 set(PROJECT_INCLUDE_DIR ${PROJECT_ROOT_DIR}/include)
 
+# main application
+add_subdirectory(app)
+
 # example library
 add_subdirectory(src)
 
