@@ -16,7 +16,10 @@
  *  You should have received a copy of the GNU General Public License
  *  along with brln.  If not, see <https://www.gnu.org/licenses/>.
  */
-#include "main.hpp"
+#include <iostream>
+#include <string>
+#include <vector>
+#include "sum_integers.hpp"
 
 // we assume all arguments are integers and we sum them up
 // for simplicity we do not verify the type of arguments
