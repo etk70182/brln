@@ -15,8 +15,13 @@
  *  You should have received a copy of the GNU General Public License
  *  along with brln.  If not, see <https://www.gnu.org/licenses/>.
  */
-#include <iostream> 
+#include <iostream>
+#ifdef __WINDOWS_DS__
+#include <chrono>
+#include <thread>
+#else
 #include <unistd.h>
+#endif
 #include <stdlib.h>
 
 #include "PdBase.hpp"
@@ -91,7 +96,11 @@ int main (int argc, char *argv[]) {
    while(1){
       lpd.receiveMessages();
       lpd.sendFloat("FromCpp", 578);
+#ifdef __WINDOWS_DS__
+	  std::this_thread::sleep_for(std::chrono::microseconds(100));
+#else
       usleep(100);
+#endif
    }
 
    return 0;
