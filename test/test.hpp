@@ -21,3 +21,5 @@
 #include <vector>
 #include "gtest/gtest.h"
 #include "sum_integers.hpp"
+#include "PdObject.h"
+#include "RtAudio.h"

@@ -40,6 +40,7 @@ PRIVATE
 target_link_libraries(unit_tests
 PRIVATE
   sum_integers
+  libPatchWrapper
   gtest_main
 )
 
