@@ -6,6 +6,8 @@ jobs:
     name: Code Coverage Stage
     runs-on: ubuntu-latest
     steps:
+    - name: Install gcov & lcov
+      run: sudo apt-get install -y lcov
     - uses: actions/checkout@v2
     - name: Make Build Directory
       run: mkdir build
