@@ -1,5 +1,4 @@
-set( PROJECT_ROOT_DIR ${PROJECT_ROOT_DIR} PARENT_SCOPE )
-include(${PROJECT_ROOT_DIR}/fetch_git_repo.cmake)
+include(fetch_git_repo)
 
 fetch_git_repo(
 googletest
@@ -30,21 +29,23 @@ foreach(_tgt gtest gtest_main gmock gmock_main)
 endforeach()
 endif()
 
-add_executable(cpp_test "")
+add_executable(unit_tests "")
 
-target_sources(cpp_test
+target_sources(unit_tests
 PRIVATE
   test.hpp
   test.cpp
 )
 
-target_link_libraries(cpp_test
+target_link_libraries(unit_tests
 PRIVATE
   sum_integers
   gtest_main
 )
 
 add_test(
-NAME google_test
-COMMAND $<TARGET_FILE:cpp_test>
+NAME unit_tests
+COMMAND $<TARGET_FILE:unit_tests>
 )
+
+include(CodeCoverage)

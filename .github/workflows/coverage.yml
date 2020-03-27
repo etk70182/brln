@@ -1,0 +1,25 @@
+name: coverage
+on: [push, pull_request]
+
+jobs:
+  codecheck:
+    name: Code Coverage Stage
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Make Build Directory
+      run: mkdir build
+    - name: Configuration
+      run: cmake .. -DCMAKE_BUILD_TYPE=Coverage
+      working-directory: ./build
+    - name: Generate coverage
+      run: cmake --build . --target coverage
+      working-directory: ./build
+    - name: List Coverage
+      run: lcov --list coverage_out.info.cleaned
+	  working-directory: ./build
+    - name: Install coveralls
+  	  run: gem install coveralls-lcov
+    -name: Upload Coverage
+      run: coveralls-lcov coverage_out.info.cleaned
+      working-directory: ./build
