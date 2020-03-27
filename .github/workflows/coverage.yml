@@ -15,11 +15,12 @@ jobs:
     - name: Generate coverage
       run: cmake --build . --target coverage
       working-directory: ./build
-    - name: List Coverage
+    - name: List coverage
       run: lcov --list coverage_out.info.cleaned
       working-directory: ./build
     - name: Install coveralls
-  	  run: gem install coveralls-lcov
-    -name: Upload Coverage
+      run: gem install coveralls-lcov
+      working-directory: ./build
+    - name: Upload coveralls
       run: coveralls-lcov coverage_out.info.cleaned
       working-directory: ./build
