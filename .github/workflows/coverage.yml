@@ -6,8 +6,8 @@ jobs:
     name: Code Coverage Stage
     runs-on: ubuntu-latest
     steps:
-    - name: Install gcov & lcov
-      run: sudo apt-get install -y gcov lcov
+    - name: Install lcov
+      run: sudo apt-get install -y lcov
     - uses: actions/checkout@v2
     - name: Make Build Directory
       run: mkdir build
@@ -17,9 +17,7 @@ jobs:
     - name: Generate coverage
       run: cmake --build . --target coverage
       working-directory: ./build
-    - name: Install coveralls
-      run: gem install coveralls-lcov
-      working-directory: ./build
-    - name: Upload coveralls
-      run: coveralls-lcov coverage_out.info.cleaned
-      working-directory: ./build
+    - name: Coveralls
+      uses: coverallsapp/github-action@master
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
