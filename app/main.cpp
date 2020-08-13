@@ -16,92 +16,113 @@
  *  along with brln.  If not, see <https://www.gnu.org/licenses/>.
  */
 #include <iostream>
-#ifdef __WINDOWS_DS__
-#include <chrono>
-#include <thread>
-#else
+#ifndef __WINDOWS_DS__
 #include <unistd.h>
 #endif
 #include <stdlib.h>
-
+#ifdef __WINDOWS_DS__
+#include "Chrono.h"
+#include "Thread.h"
+#endif
 #include "PdBase.hpp"
 #include "RtAudio.h"
 #include "PdObject.h"
+
+#include "mainwindow.h"
+//#include "ui_mainwindow.h"
 
 RtAudio audio;
 pd::PdBase lpd;
 PdObject pdObject;
 
-int audioCallback(void *outputBuffer, void *inputBuffer, unsigned int nBufferFrames, double streamTime, RtAudioStreamStatus status, void *userData){
+void init();
+int audioCallback(void *outputBuffer, void *inputBuffer,
+                  unsigned int nBufferFrames, double streamTime,
+                  RtAudioStreamStatus status, void *userData);
 
-   // pass audio samples to/from libpd
-   int ticks = nBufferFrames / 64;
-   lpd.processFloat(ticks, (float *)inputBuffer, (float*)outputBuffer);
+MainWindow::MainWindow(QWidget *parent) :
+    QMainWindow(parent),
+    ui(new Ui::MainWindow)
+{
+    ui->setupUi(this);
+    init();
 
-   return 0;
-}
-
-void init(){
-   unsigned int sampleRate = 44100;
-   unsigned int bufferFrames = 128;
-
-   // init pd
-   if(!lpd.init(0, 2, sampleRate)) {
-      std::cerr << "Could not init pd" << std::endl;
-      exit(1);
-   }
-
-   // receive messages from pd
-   lpd.setReceiver(&pdObject);
-   lpd.subscribe("cursor");
-
-   // send DSP 1 message to pd
-   lpd.computeAudio(true);
-
-   // load the patch
-   pd::Patch patch = lpd.openPatch("test.pd", "./pd");
-   std::cout << patch << std::endl;
-
-   // use the RtAudio API to connect to the default audio device
-   if(audio.getDeviceCount()==0){
-      std::cout << "There are no available sound devices." << std::endl;
-      exit(1);
-   }
-
-   RtAudio::StreamParameters parameters;
-   parameters.deviceId = audio.getDefaultOutputDevice();
-   parameters.nChannels = 2;
-
-   RtAudio::StreamOptions options;
-   options.streamName = "libpd rtaudio test";
-   options.flags = RTAUDIO_SCHEDULE_REALTIME;
-   if(audio.getCurrentApi() != RtAudio::MACOSX_CORE) {
-      options.flags |= RTAUDIO_MINIMIZE_LATENCY; // CoreAudio doesn't seem to like this
-   }
-   try {
-      audio.openStream( &parameters, NULL, RTAUDIO_FLOAT32, sampleRate, &bufferFrames, &audioCallback, NULL, &options );
-      audio.startStream();
-   }
-   catch(RtAudioError& e) {
-      std::cerr << e.getMessage() << std::endl;
-      exit(1);
-   }
-}
-
-
-int main (int argc, char *argv[]) {
-   init();
-
-   // keep the program alive until it's killed with Ctrl+C
-   while(1){
-      lpd.receiveMessages();
-      lpd.sendFloat("FromCpp", 578);
+    // keep the program alive until it's killed with Ctrl+C
+    while (1) {
+       lpd.receiveMessages();
+       lpd.sendFloat("FromCpp", 578);
 #ifdef __WINDOWS_DS__
-	  std::this_thread::sleep_for(std::chrono::microseconds(100));
+       std::this_thread::sleep_for(std::chrono::microseconds(100));
 #else
-      usleep(100);
+       usleep(100);
 #endif
-   }
+    }
 
-   return 0;
+    return 0;
+}
+
+MainWindow::~MainWindow()
+{
+    delete ui;
+}
+
+void init() {
+    unsigned int sampleRate = 44100;
+    unsigned int bufferFrames = 128;
+
+    // init pd
+    if (!lpd.init(0, 2, sampleRate)) {
+       std::cerr << "Could not init pd" << std::endl;
+       exit(1);
+    }
+
+    // receive messages from pd
+    lpd.setReceiver(&pdObject);
+    lpd.subscribe("cursor");
+
+    // send DSP 1 message to pd
+    lpd.computeAudio(true);
+
+    // load the patch
+    pd::Patch patch = lpd.openPatch("test.pd", "./pd");
+    std::cout << patch << std::endl;
+
+    // use the RtAudio API to connect to the default audio device
+    if (audio.getDeviceCount() == 0) {
+       std::cout << "There are no available sound devices." << std::endl;
+       exit(1);
+    }
+
+    RtAudio::StreamParameters parameters;
+    parameters.deviceId = audio.getDefaultOutputDevice();
+    parameters.nChannels = 2;
+
+    RtAudio::StreamOptions options;
+    options.streamName = "libpd rtaudio test";
+    options.flags = RTAUDIO_SCHEDULE_REALTIME;
+    if (audio.getCurrentApi() != RtAudio::MACOSX_CORE) {
+        // CoreAudio doesn't seem to like this
+        options.flags |= RTAUDIO_MINIMIZE_LATENCY;
+    }
+    try {
+       audio.openStream(&parameters, NULL, RTAUDIO_FLOAT32,
+                        sampleRate, &bufferFrames, &audioCallback,
+                        NULL, &options);
+       audio.startStream();
+    }
+    catch(RtAudioError& e) {
+       std::cerr << e.getMessage() << std::endl;
+       exit(1);
+    }
+}
+
+int audioCallback(void *outputBuffer, void *inputBuffer,
+                  unsigned int nBufferFrames, double streamTime,
+                  RtAudioStreamStatus status, void *userData) {
+    // pass audio samples to/from libpd
+    int ticks = nBufferFrames / 64;
+    lpd.processFloat(ticks,
+                     reinterpret_cast<float *>(inputBuffer),
+                     reinterpret_cast<float *>(outputBuffer));
+    return 0;
 }
