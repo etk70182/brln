@@ -11,7 +11,7 @@ jobs:
     - name: Install cpplint
       run: pip install cpplint
     - name: Code Check
-      run: echo "cpplint --recursive ." #cpplint --recursive .
+      run: echo "cpplint --recursive ." #cpplint --exclude=src/libpw/* --exclude=include/libpw/* --exclude=include/c++11/* --recursive .
 
   unittest:
     needs: [codecheck]
