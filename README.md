@@ -6,6 +6,7 @@
 [![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/etk70182/brln.svg)](http://isitmaintained.com/project/etk70182/brln "Average time to resolve an issue")
 [![Percentage of issues still open](http://isitmaintained.com/badge/open/etk70182/brln.svg)](http://isitmaintained.com/project/etk70182/brln "Percentage of issues still open")
 [![GitHub issues](https://img.shields.io/github/issues/etk70182/brln.svg)](https://GitHub.com/etk70182/brln/issues/)
+[![GitHub issues-closed](https://img.shields.io/github/issues-closed/etk70182/brln.svg)](https://GitHub.com/etk70182/brln/issues?q=is%3Aissue+is%3Aclosed)
 ## Open Source Synthesizer
 
 Under construction...
