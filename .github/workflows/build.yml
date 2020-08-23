@@ -11,7 +11,7 @@ jobs:
     - name: Install cpplint
       run: pip install cpplint
     - name: Code Check
-      run: echo "cpplint --recursive ." #cpplint --exclude=src/libpw/* --exclude=include/libpw/* --exclude=include/c++11/* --recursive .
+      run: cpplint --filter=-build/include_subdir --exclude=src/libpw/* --exclude=include/libpw/* --exclude=include/unallowedHeaders/* --recursive .
 
   unittest:
     needs: [codecheck]
@@ -22,11 +22,13 @@ jobs:
         os: [ubuntu-latest, macos-latest, windows-latest]
     steps:
     - uses: actions/checkout@v2
-    - name: Install Qt
+    - name: Install Qt5
       uses: jurplel/install-qt-action@v2
-    - run: sudo apt-get update -y; sudo apt-get install -y libjack-dev libasound2-dev
+	- name: Install ALSA/Jack - Ubuntu
+      run: sudo apt-get update -y; sudo apt-get install -y libjack-dev libasound2-dev
       if: matrix.os == 'ubuntu-latest'
-    - run: brew install jack
+    - name: Install Jack - macOS
+	  run: brew install jack
       if: matrix.os == 'macos-latest'
     - name: Make Build Directory
       run: mkdir build
