@@ -23,7 +23,7 @@ jobs:
     - name: Make Build Directory
       run: mkdir build
     - name: Configuration
-      run: cmake .. -G"Unix Makefiles" -DCMAKE_INSTALL_PREFIX=../install -DENABLE_UNIT_TESTS=OFF
+      run: cmake .. -DCMAKE_INSTALL_PREFIX=../install -DENABLE_UNIT_TESTS=OFF
       working-directory: ./build
     - name: Build Package Source
       run: cmake --build . --target package_source
