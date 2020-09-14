@@ -7,6 +7,7 @@
  *  it under the terms of the GNU General Public License as published by
  *  the Free Software Foundation, either version 3 of the License, or
  *  (at your option) any later version.
+
  *  brln is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -15,15 +16,11 @@
  *  You should have received a copy of the GNU General Public License
  *  along with brln.  If not, see <https://www.gnu.org/licenses/>.
  */
+#ifndef INCLUDE_APP_VERSION_H_
+#define INCLUDE_APP_VERSION_H_
 
-#include <QApplication>
-#include <iostream>
-#include "mainwindow.h"
-#include "version.h"
+#define APP_VERSION_MAJOR @PROJECT_VERSION_MAJOR@
+#define APP_VERSION_MINOR @PROJECT_VERSION_MINOR@
+#define APP_VERSION_PATCH @PROJECT_VERSION_PATCH@
 
-int main(int argc, char *argv[]) {
-    QApplication a(argc, argv);
-    MainWindow w;
-    w.show();
-    return a.exec();
-}
+#endif  // INCLUDE_APP_VERSION_H_
