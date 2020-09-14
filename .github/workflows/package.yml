@@ -17,15 +17,13 @@ jobs:
     - name: Make Build Directory
       run: mkdir build
     - name: Configuration
-      run: cmake ..
+      run: cmake .. -DENABLE_UNIT_TESTS=OFF
       working-directory: ./build
-    - name: Build
-      run: cmake --build .
-      working-directory: ./build
-    - name: Package Source
+    - name: Build Package Source
       run: cmake --build . --target package_source
       working-directory: ./build
-    - name: Create Download
-      uses: actions/download-artifact@v2
+    - name: Upload Artifacts
+      uses: actions/upload-artifact@v2
       with:
-        name: ./build/brln*Source*
+        name: source-packages
+        path: ./build/brln*Source*
