@@ -27,6 +27,9 @@ jobs:
       run: cmake --build . --target package_source
       if: matrix.os == 'ubuntu-latest'
       working-directory: ./build
+    - name: Build
+      run: cmake --build .
+      working-directory: ./build
     - name: Build Binary Packages
       run: cmake --build . --target package
       working-directory: ./build
