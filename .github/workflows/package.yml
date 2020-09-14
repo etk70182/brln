@@ -18,10 +18,12 @@ jobs:
     - name: Install Jack - macOS
       run: brew install jack
       if: matrix.os == 'macos-latest'
+    - name: Make Install Directory
+      run: mkdir install
     - name: Make Build Directory
       run: mkdir build
     - name: Configuration
-      run: cmake .. -DENABLE_UNIT_TESTS=OFF
+      run: cmake .. -G"Unix Makefiles" -DCMAKE_INSTALL_PREFIX=../install -DENABLE_UNIT_TESTS=OFF
       working-directory: ./build
     - name: Build Package Source
       run: cmake --build . --target package_source
