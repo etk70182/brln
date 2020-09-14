@@ -22,11 +22,7 @@ jobs:
     - name: Build Package Source
       run: cmake --build . --target package_source
       working-directory: ./build
-    - name: Upload TGZ Artifact
-      uses: actions/upload-artifact@v2
-      with:
-        path: ./build/brln*Source.tar.gz
-    - name: Upload ZIP Artifact
+    - name: Upload Source-Zip
       uses: actions/upload-artifact@v2
       with:
         path: ./build/brln*Source.zip
