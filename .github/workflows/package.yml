@@ -23,9 +23,14 @@ jobs:
     - name: Make Install Directory
       run: mkdir install
       working-directory: ./build
-    - name: Configuration
+    - name: Configuration on Ubuntu/MacOS
+      run: cmake .. -DCMAKE_INSTALL_PREFIX=./install -DENABLE_UNIT_TESTS=OFF
+      working-directory: ./build
+      if: matrix.os != 'windows-latest'
+    - name: Configuration on Windows
       run: cmake .. -DCMAKE_INSTALL_PREFIX=./install -DENABLE_UNIT_TESTS=OFF --config Release
       working-directory: ./build
+      if: matrix.os == 'windows-latest'
     - name: Build Package Source
       run: cmake --build . --target package_source
       if: matrix.os == 'ubuntu-latest'
@@ -33,9 +38,14 @@ jobs:
     - name: Build
       run: cmake --build .
       working-directory: ./build
-    - name: Configurate Again
+    - name: Refresh Cache on Ubuntu/MacOS
+      run: cmake .. -DCMAKE_INSTALL_PREFIX=./install -DENABLE_UNIT_TESTS=OFF
+      working-directory: ./build
+      if: matrix.os != 'windows-latest'
+    - name: Refresh Cache on Windows
       run: cmake .. -DCMAKE_INSTALL_PREFIX=./install -DENABLE_UNIT_TESTS=OFF --config Release
       working-directory: ./build
+      if: matrix.os == 'windows-latest'
     - name: Install
       run: cmake --build . --target install
       working-directory: ./build
