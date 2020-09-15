@@ -33,10 +33,10 @@ jobs:
     - name: Build
       run: cmake --build .
       working-directory: ./build
-    - name: Install
-      run: cmake --build . --target install
+    - name: Configurate Again
+      run: cmake .. -DCMAKE_INSTALL_PREFIX=./install -DENABLE_UNIT_TESTS=OFF
       working-directory: ./build
-    - name: Install Again
+    - name: Install
       run: cmake --build . --target install
       working-directory: ./build
     - name: Build Binary Packages
