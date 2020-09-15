@@ -24,7 +24,7 @@ jobs:
       run: mkdir install
       working-directory: ./build
     - name: Configuration
-      run: cmake .. -DCMAKE_INSTALL_PREFIX=./install -DENABLE_UNIT_TESTS=OFF
+      run: cmake .. -DCMAKE_INSTALL_PREFIX=./install -DENABLE_UNIT_TESTS=OFF --config Release
       working-directory: ./build
     - name: Build Package Source
       run: cmake --build . --target package_source
@@ -34,7 +34,7 @@ jobs:
       run: cmake --build .
       working-directory: ./build
     - name: Configurate Again
-      run: cmake .. -DCMAKE_INSTALL_PREFIX=./install -DENABLE_UNIT_TESTS=OFF
+      run: cmake .. -DCMAKE_INSTALL_PREFIX=./install -DENABLE_UNIT_TESTS=OFF --config Release
       working-directory: ./build
     - name: Install
       run: cmake --build . --target install
