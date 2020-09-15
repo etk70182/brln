@@ -36,11 +36,18 @@ jobs:
     - name: Refresh Cache
       run: cmake ..
       working-directory: ./build
-    - name: Build Binary Packages
+    - name: Build Binary Packages on MacOS/Windows
       run: cmake --build . --target package
       working-directory: ./build
+      if: matrix.os != 'ubuntu-latest'
+    - name: Build AppImage on Ubuntu
+      run: ../cmake/deployApp.sh .
+      working-directory: ./build
+      if: matrix.os == 'ubuntu-latest'
     - name: Upload Artifact
       uses: actions/upload-artifact@v2
       with:
         name: ${{ matrix.os }}-artifacts
-        path: ./build/brln-[0-9].*
+        path: |
+          ./build/brln-[0-9].*
+          ./build/brln*.AppImage
