@@ -22,22 +22,24 @@ add_custom_command(TARGET pd_sample POST_BUILD
                    ${CMAKE_SOURCE_DIR}/pd/ $<TARGET_FILE_DIR:pd_sample>/pd/)
 
 # Prepare RPATH
-file(RELATIVE_PATH _rel ${CMAKE_INSTALL_PREFIX}/${INSTALL_BINDIR} ${CMAKE_INSTALL_PREFIX})
-if(APPLE)
-  set(_rpath "@loader_path/${_rel}")
-else()
-  set(_rpath "\$ORIGIN/${_rel}")
-endif()
-file(TO_NATIVE_PATH "${_rpath}/${INSTALL_LIBDIR}" brln_RPATH)
+if(CMAKE_SYSTEM_NAME STREQUAL "Linux" OR CMAKE_SYSTEM_NAME STREQUAL "Darwin")
+	file(RELATIVE_PATH _rel ${CMAKE_INSTALL_PREFIX}/${INSTALL_BINDIR} ${CMAKE_INSTALL_PREFIX})
+	if(APPLE)
+	  set(_rpath "@loader_path/${_rel}")
+	else()
+	  set(_rpath "\$ORIGIN/${_rel}")
+	endif()
+	file(TO_NATIVE_PATH "${_rpath}/${INSTALL_LIBDIR}" brln_RPATH)
 
-set_target_properties(pd_sample
-  PROPERTIES
-    MACOSX_RPATH ON
-    SKIP_BUILD_RPATH OFF
-    BUILD_WITH_INSTALL_RPATH OFF
-    INSTALL_RPATH "${brln_RPATH}"
-    INSTALL_RPATH_USE_LINK_PATH ON
-  )
+	set_target_properties(pd_sample
+	  PROPERTIES
+		MACOSX_RPATH ON
+		SKIP_BUILD_RPATH OFF
+		BUILD_WITH_INSTALL_RPATH OFF
+		INSTALL_RPATH "${brln_RPATH}"
+		INSTALL_RPATH_USE_LINK_PATH ON
+	  )
+endif(CMAKE_SYSTEM_NAME STREQUAL "Linux" OR CMAKE_SYSTEM_NAME STREQUAL "Darwin")
 
 # <<< Install and export targets >>>
 
