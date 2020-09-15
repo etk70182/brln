@@ -33,6 +33,18 @@ jobs:
     - name: Build
       run: cmake --build .
       working-directory: ./build
+    - name: List build
+      run: ls -l
+      working-directory: ./build/
+    - name: List _deps
+      run: ls -l
+      working-directory: ./build/_deps/
+    - name: List libpd-src
+      run: ls -l
+      working-directory: ./build/_deps/libpd-src/
+    - name: List libs
+      run: ls -l
+      working-directory: ./build/_deps/libpd-src/libs/
     - name: Install
       run: cmake --build . --target install
       working-directory: ./build
