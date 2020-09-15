@@ -68,3 +68,8 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Windows")
     include(DeployQt)
     windeployqt(pd_sample)
 endif()
+
+if(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
+    include(DeployQt)
+    macdeployqt(pd_sample)
+endif()
