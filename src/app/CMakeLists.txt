@@ -9,17 +9,17 @@ qt5_wrap_cpp(APP_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/mainwindow.cpp ${PROJECT_IN
 qt5_wrap_ui(UI_HEADERS ${CMAKE_CURRENT_SOURCE_DIR}/mainwindow.ui)
 
 # main code
-add_executable(pd_sample ${APP_SOURCES} ${UI_HEADERS})
+add_executable(brln ${APP_SOURCES} ${UI_HEADERS})
 
-target_include_directories(pd_sample PUBLIC ${PROJECT_INCLUDE_DIR}/unallowedHeaders
+target_include_directories(brln PUBLIC ${PROJECT_INCLUDE_DIR}/unallowedHeaders
                                                                                         ${PROJECT_INCLUDE_DIR}/app
                                                                                         ${CMAKE_CURRENT_BINARY_DIR})
 
-target_link_libraries(pd_sample PUBLIC libpw Qt5::Widgets)
+target_link_libraries(brln PUBLIC libpw Qt5::Widgets)
 
-add_custom_command(TARGET pd_sample POST_BUILD
+add_custom_command(TARGET brln POST_BUILD
                    COMMAND ${CMAKE_COMMAND} -E copy_directory
-                   ${CMAKE_SOURCE_DIR}/pd/ $<TARGET_FILE_DIR:pd_sample>/pd/)
+                   ${CMAKE_SOURCE_DIR}/pd/ $<TARGET_FILE_DIR:brln>/pd/)
 
 # Prepare RPATH
 if(CMAKE_SYSTEM_NAME STREQUAL "Linux" OR CMAKE_SYSTEM_NAME STREQUAL "Darwin")
@@ -31,7 +31,7 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Linux" OR CMAKE_SYSTEM_NAME STREQUAL "Darwin")
 	endif()
 	file(TO_NATIVE_PATH "${_rpath}/${INSTALL_LIBDIR}" brln_RPATH)
 
-	set_target_properties(pd_sample
+	set_target_properties(brln
 	  PROPERTIES
 		MACOSX_RPATH ON
 		SKIP_BUILD_RPATH OFF
@@ -45,7 +45,7 @@ endif(CMAKE_SYSTEM_NAME STREQUAL "Linux" OR CMAKE_SYSTEM_NAME STREQUAL "Darwin")
 
 install(
   TARGETS
-    pd_sample
+    brln
   ARCHIVE
     DESTINATION ${INSTALL_LIBDIR}
     COMPONENT lib
@@ -66,10 +66,10 @@ install(FILES ${LIBPD_TARGETS} DESTINATION ${INSTALL_LIBDIR})
 
 if(CMAKE_SYSTEM_NAME STREQUAL "Windows")
     include(DeployQt)
-    windeployqt(pd_sample)
+    windeployqt(brln)
 endif()
 
 if(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
     include(DeployQt)
-    macdeployqt(pd_sample)
+    macdeployqt(brln)
 endif()
