@@ -7,7 +7,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, macos-latest]
+        os: [ubuntu-latest, windows-latest]
     steps:
     - uses: actions/checkout@v2
     - name: Install Qt5
@@ -18,12 +18,13 @@ jobs:
     - name: Install Jack - macOS
       run: brew install jack
       if: matrix.os == 'macos-latest'
-    - name: Make Install Directory
-      run: mkdir install
     - name: Make Build Directory
       run: mkdir build
+    - name: Make Install Directory
+      run: mkdir install
+      working-directory: ./build
     - name: Configuration
-      run: cmake .. -DCMAKE_INSTALL_PREFIX=../install -DENABLE_UNIT_TESTS=OFF
+      run: cmake .. -DCMAKE_INSTALL_PREFIX=./install -DENABLE_UNIT_TESTS=OFF
       working-directory: ./build
     - name: Build Package Source
       run: cmake --build . --target package_source
@@ -31,6 +32,9 @@ jobs:
       working-directory: ./build
     - name: Build
       run: cmake --build .
+      working-directory: ./build
+    - name: Install
+      run: cmake --build . --target install
       working-directory: ./build
     - name: Build Binary Packages
       run: cmake --build . --target package
