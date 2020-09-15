@@ -60,8 +60,11 @@ install(
     COMPONENT dev
   )
 
-message(STATUS ":::::::::::::::::: ${CMAKE_BINARY_DIR}")
-
 install(FILES ${CMAKE_SOURCE_DIR}/pd/test.pd DESTINATION ${INSTALL_BINDIR}/pd)
 file(GLOB LIBPD_TARGETS ${CMAKE_BINARY_DIR}/_deps/libpd-src/libs/libpd${CMAKE_SHARED_LIBRARY_SUFFIX})
 install(FILES ${LIBPD_TARGETS} DESTINATION ${INSTALL_LIBDIR})
+
+if(CMAKE_SYSTEM_NAME STREQUAL "Windows")
+    include(DeployQt)
+    windeployqt(pd_sample)
+endif()
