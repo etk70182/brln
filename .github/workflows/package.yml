@@ -7,7 +7,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest]
+        os: [ubuntu-latest, macos-latest, windows-latest]
     steps:
     - uses: actions/checkout@v2
     - name: Install Qt5
@@ -33,19 +33,10 @@ jobs:
     - name: Build
       run: cmake --build .
       working-directory: ./build
-    - name: List build
-      run: ls -l
-      working-directory: ./build/
-    - name: List _deps
-      run: ls -l
-      working-directory: ./build/_deps/
-    - name: List libpd-src
-      run: ls -l
-      working-directory: ./build/_deps/libpd-src/
-    - name: List libs
-      run: ls -l
-      working-directory: ./build/_deps/libpd-src/libs/
     - name: Install
+      run: cmake --build . --target install
+      working-directory: ./build
+    - name: Install Again
       run: cmake --build . --target install
       working-directory: ./build
     - name: Build Binary Packages
