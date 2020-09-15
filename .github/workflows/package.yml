@@ -28,7 +28,7 @@ jobs:
       working-directory: ./build
       if: matrix.os != 'windows-latest'
     - name: Configuration on Windows
-      run: cmake .. -DCMAKE_INSTALL_PREFIX=./install -DENABLE_UNIT_TESTS=OFF --config Release
+      run: cmake .. -DCMAKE_INSTALL_PREFIX=./install -DENABLE_UNIT_TESTS=OFF -DCMAKE_CONFIGURATION_TYPES=Release
       working-directory: ./build
       if: matrix.os == 'windows-latest'
     - name: Build Package Source
@@ -43,7 +43,7 @@ jobs:
       working-directory: ./build
       if: matrix.os != 'windows-latest'
     - name: Refresh Cache on Windows
-      run: cmake .. -DCMAKE_INSTALL_PREFIX=./install -DENABLE_UNIT_TESTS=OFF --config Release
+      run: cmake .. -DCMAKE_INSTALL_PREFIX=./install -DENABLE_UNIT_TESTS=OFF -DCMAKE_CONFIGURATION_TYPES=Release
       working-directory: ./build
       if: matrix.os == 'windows-latest'
     - name: Install
