@@ -75,4 +75,4 @@ if(ENABLE_UNIT_TESTS)
   add_subdirectory(test)
 endif()
 
-include(CMakeCPack.cmake)
+include(CMakeCPack)
