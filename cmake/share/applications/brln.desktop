@@ -3,5 +3,5 @@ Type=Application
 Name=brln
 Comment=Free Software Synthesizer
 Exec=brln
-Icon=brln.xpm
+Icon=brln
 Categories=Audio;
