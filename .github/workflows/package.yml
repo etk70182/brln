@@ -41,7 +41,7 @@ jobs:
       working-directory: ./build
       if: matrix.os != 'ubuntu-16.04'
     - name: Build AppImage on Ubuntu
-      run: ../cmake/deployApp.sh .
+      run: ./package-linux-appimage.sh .
       working-directory: ./build
       if: matrix.os == 'ubuntu-16.04'
     - name: Upload Artifact
@@ -49,5 +49,4 @@ jobs:
       with:
         name: ${{ matrix.os }}-artifacts
         path: |
-          ./build/brln-[0-9].*
-          ./build/brln*.AppImage
+          ./build/dist/brln*.zip

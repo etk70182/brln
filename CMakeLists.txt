@@ -4,7 +4,7 @@ cmake_minimum_required(VERSION 3.5 FATAL_ERROR)
 # project name and language
 project(brln 
 	LANGUAGES CXX C
-	VERSION 1.0.0
+	VERSION 0.1.0
 )
 
 # require C++14
@@ -76,3 +76,6 @@ if(ENABLE_UNIT_TESTS)
 endif()
 
 include(CMakeCPack)
+
+#configure package scripts
+configure_file(${PROJECT_SOURCE_DIR}/cmake/package-linux-appimage.sh.in ${PROJECT_BINARY_DIR}/scripts/package-linux-appimage.sh @ONLY)

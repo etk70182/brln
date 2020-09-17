@@ -1,15 +1,24 @@
 SCRIPT_PATH="${BASH_SOURCE[0]}"
 mkdir -p brln.AppDir/usr/lib
-cp -r $1/bin brln.AppDir/usr/bin
+cp $1/bin/brln brln.AppDir/usr/bin/.
 cp $1/_deps/libpd-src/libs/libpd.so brln.AppDir/usr/lib/.
 cp $1/_deps/libpd-src/libs/libpd.so brln.AppDir/usr/lib/.
 cp -r `dirname "$SCRIPT_PATH"`/share brln.AppDir/usr/share
 cp `dirname "$SCRIPT_PATH"`/share/applications/brln.desktop brln.AppDir/.
-cp `dirname "$SCRIPT_PATH"`/share/icons/hicolor/400x400/brln.png brln.AppDir/.
+cp `dirname "$SCRIPT_PATH"`/share/icons/brln.svg brln.AppDir/.
 
 # Get and run linuxdeployqt
 wget -c https://github.com/probonopd/linuxdeployqt/releases/download/continuous/linuxdeployqt-continuous-x86_64.AppImage
 chmod a+x linuxdeployqt-continuous-x86_64.AppImage
 
 # Create AppImage using linuxdeployqt
+export VERSION="@PROJECT_VERSION_MAJOR@.@PROJECT_VERSION_MINOR@.@PROJECT_VERSION_PATCH@"
 ./linuxdeployqt-continuous-x86_64.AppImage ./brln.AppDir/usr/bin/brln -appimage
+
+# Post process artifacts
+mkdir -p dist/brln-$VERSION-linux
+mv brln-[0-9].* dist/.
+mv brln*.AppImage dist/brln-$VERSION-linux/brln
+chmod +x dist/brln-$VERSION-linux/brln
+cp -r $1/bin/pd dist/brln-$VERSION-linux/.
+pushd dist && zip -r brln-$VERSION-linux.zip brln-$VERSION-linux/; popd
