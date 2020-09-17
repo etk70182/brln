@@ -37,7 +37,7 @@ if(APPLE)
   set(CPACK_BUNDLE_NAME "brln")
   configure_file(${PROJECT_SOURCE_DIR}/cmake/Info.plist.in Info.plist @ONLY)
   set(CPACK_BUNDLE_PLIST ${CMAKE_CURRENT_BINARY_DIR}/Info.plist)
-  set(CPACK_BUNDLE_ICON ${PROJECT_SOURCE_DIR}/cmake/coffee.icns)
+  set(CPACK_BUNDLE_ICON ${PROJECT_SOURCE_DIR}/cmake/brln.icns)
 endif()
 
 message(STATUS "CPack generators: ${CPACK_GENERATOR}")

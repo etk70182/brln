@@ -1,11 +1,12 @@
 SCRIPT_PATH="${BASH_SOURCE[0]}"
+mkdir -p brln.AppDir/usr/bin
 mkdir -p brln.AppDir/usr/lib
+mkdir -p brln.AppDir/usr/share
 cp $1/bin/brln brln.AppDir/usr/bin/.
 cp $1/_deps/libpd-src/libs/libpd.so brln.AppDir/usr/lib/.
-cp $1/_deps/libpd-src/libs/libpd.so brln.AppDir/usr/lib/.
-cp -r `dirname "$SCRIPT_PATH"`/share brln.AppDir/usr/share
-cp `dirname "$SCRIPT_PATH"`/share/applications/brln.desktop brln.AppDir/.
-cp `dirname "$SCRIPT_PATH"`/share/icons/brln.svg brln.AppDir/.
+cp -r `dirname "$SCRIPT_PATH"`/../../cmake/share brln.AppDir/usr/.
+cp `dirname "$SCRIPT_PATH"`/../../cmake/share/applications/brln.desktop brln.AppDir/.
+cp `dirname "$SCRIPT_PATH"`/../../cmake/share/icons/brln.xpm brln.AppDir/.
 
 # Get and run linuxdeployqt
 wget -c https://github.com/probonopd/linuxdeployqt/releases/download/continuous/linuxdeployqt-continuous-x86_64.AppImage
