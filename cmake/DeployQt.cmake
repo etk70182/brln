@@ -84,6 +84,11 @@ function(macdeployqt target)
 		            ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/../Resources/brln.icns
     )
     add_custom_command(TARGET ${target} POST_BUILD
+        COMMAND install_name_tool -change libpd.dylib
+			@rpath/libpd.dylib
+            \"$<TARGET_FILE:${target}>\"
+    )
+    add_custom_command(TARGET ${target} POST_BUILD
         COMMAND "${MACDEPLOYQT_EXECUTABLE}"
             \"$<TARGET_FILE_DIR:${target}>/../..\"
             -always-overwrite

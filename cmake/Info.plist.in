@@ -13,6 +13,8 @@
 <string>AdminAuthorization</string>
 <key>IFPkgFlagDefaultLocation</key>
 <string>@CPACK_PACKAGE_DEFAULT_LOCATION@</string>
+<key>CFBundleIconFile</key>
+<string>brln.icns</string>
 <key>IFPkgFlagInstallFat</key>
 <false/>
 <key>IFPkgFlagIsRequired</key>

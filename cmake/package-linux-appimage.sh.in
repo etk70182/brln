@@ -20,8 +20,8 @@ export VERSION="@PROJECT_VERSION_MAJOR@.@PROJECT_VERSION_MINOR@.@PROJECT_VERSION
 # Post process artifacts
 brlnAppImage=brln-$VERSION-x86_64.AppImage
 mkdir -p dist/brln-$VERSION-linux
+mv $brlnAppImage dist/brln-$VERSION-linux/brln
 mv brln-[0-9].* dist/.
-mv dist/$brlnAppImage dist/brln-$VERSION-linux/brln
 chmod +x dist/brln-$VERSION-linux/brln
 cp -r bin/pd dist/brln-$VERSION-linux/.
 pushd dist && zip -r brln-$VERSION-linux.zip brln-$VERSION-linux/; popd

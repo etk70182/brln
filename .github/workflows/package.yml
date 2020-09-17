@@ -47,10 +47,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: ${{ matrix.os }}-artifacts
-        path: |
-          ./build/brln-[0-9].*
-          ./brln.app/
-          ./*
+        path: ./build/brln*
       if: matrix.os != 'ubuntu-16.04'
     - name: Upload Artifact on Ubuntu
       uses: actions/upload-artifact@v2
