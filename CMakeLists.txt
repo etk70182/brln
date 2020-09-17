@@ -56,6 +56,15 @@ foreach(p LIB BIN INCLUDE CMAKE)
   unset(_path)
 endforeach()
 
+# For macOS, the output directories form the app bundle; for all other
+# platforms, the output paths mirror the installation paths
+if(APPLE)
+    set(CONTENTS_DIRECTORY "${CMAKE_BINARY_DIR}/brln.app/Contents")
+    set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CONTENTS_DIRECTORY}/MacOS")
+    set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CONTENTS_DIRECTORY}/Frameworks")
+    set(PLUGIN_OUTPUT_DIRECTORY "${CONTENTS_DIRECTORY}/PlugIns/brln")
+endif()
+
 # configure version
 configure_file(${PROJECT_SOURCE_DIR}/cmake/version.h.in ${PROJECT_INCLUDE_DIR}/app/version.h @ONLY)
 
@@ -78,4 +87,4 @@ endif()
 include(CMakeCPack)
 
 #configure package scripts
-configure_file(${PROJECT_SOURCE_DIR}/cmake/package-linux-appimage.sh.in ${PROJECT_BINARY_DIR}/scripts/package-linux-appimage.sh @ONLY)
+configure_file(${PROJECT_SOURCE_DIR}/cmake/package-linux-appimage.sh.in ${PROJECT_SOURCE_DIR}/scripts/package-linux-appimage.sh @ONLY)

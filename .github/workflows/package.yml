@@ -41,14 +41,15 @@ jobs:
       working-directory: ./build
       if: matrix.os != 'ubuntu-16.04'
     - name: Build AppImage on Ubuntu
-      run: ./scripts/package-linux-appimage.sh .
-      working-directory: ./build
+      run: ./scripts/package-linux-appimage.sh build
       if: matrix.os == 'ubuntu-16.04'
     - name: Upload Artifact on MacOS/Windows
       uses: actions/upload-artifact@v2
       with:
         name: ${{ matrix.os }}-artifacts
-        path: ./build/brln-[0-9].*
+        path: |
+          ./build/brln-[0-9].*
+          ./brln.app/
       if: matrix.os != 'ubuntu-16.04'
     - name: Upload Artifact on Ubuntu
       uses: actions/upload-artifact@v2
