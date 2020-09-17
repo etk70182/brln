@@ -77,10 +77,17 @@ endfunction()
 # Add commands that copy the required Qt files to the application bundle
 # represented by the target.
 function(macdeployqt target)
+	configure_file(${PROJECT_SOURCE_DIR}/cmake/Info.plist.in ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/../Info.plist @ONLY)
+	add_custom_command(TARGET ${target} POST_BUILD
+		 COMMAND ${CMAKE_COMMAND} -E copy
+		            ${PROJECT_SOURCE_DIR}/cmake/brln.icns
+		            ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/../Resources/brln.icns
+    )
     add_custom_command(TARGET ${target} POST_BUILD
         COMMAND "${MACDEPLOYQT_EXECUTABLE}"
             \"$<TARGET_FILE_DIR:${target}>/../..\"
             -always-overwrite
+            -dmg
         COMMENT "Deploying Qt..."
     )
 endfunction()
