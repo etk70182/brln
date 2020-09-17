@@ -17,10 +17,10 @@ export VERSION="@PROJECT_VERSION_MAJOR@.@PROJECT_VERSION_MINOR@.@PROJECT_VERSION
 ./linuxdeployqt-continuous-x86_64.AppImage ./brln.AppDir/usr/bin/brln -appimage
 
 # Post process artifacts
-ls -l
 mkdir -p dist/brln-$VERSION-linux
+ls -l
 mv brln-[0-9].* dist/.
-mv brln-$VERSION-x86_64.AppImage dist/brln-$VERSION-linux/.
+cp *.AppImage dist/brln-$VERSION-linux/.
 ls -l dist/brln-$VERSION-linux
 chmod +x dist/brln-$VERSION-linux/brln*
 cp -r $1/bin/pd dist/brln-$VERSION-linux/.
