@@ -54,5 +54,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: ${{ matrix.os }}-artifacts
-        path: ./build/dist/brln*.zip
+        path: |
+          ./build/dist/brln*.zip
+          ./build/dist/brln*.deb
       if: matrix.os == 'ubuntu-16.04'
