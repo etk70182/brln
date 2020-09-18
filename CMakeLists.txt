@@ -88,5 +88,5 @@ include(CMakeCPack)
 
 #configure package scripts
 configure_file(${PROJECT_SOURCE_DIR}/cmake/package-linux-appimage.sh.in ${PROJECT_SOURCE_DIR}/scripts/package-linux-appimage.sh @ONLY)
-configure_file(${PROJECT_SOURCE_DIR}/cmake/package-macos.sh.in ${PROJECT_SOURCE_DIR}/scripts/package-macos.sh @ONLY)
+configure_file(${PROJECT_SOURCE_DIR}/cmake/package-macosx.sh.in ${PROJECT_SOURCE_DIR}/scripts/package-macosx.sh @ONLY)
 configure_file(${PROJECT_SOURCE_DIR}/cmake/package-windows.bat.in ${PROJECT_SOURCE_DIR}/scripts/package-windows.bat @ONLY)

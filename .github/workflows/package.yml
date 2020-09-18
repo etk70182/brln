@@ -57,23 +57,8 @@ jobs:
       working-directory: ./build
       if: matrix.os == 'ubuntu-16.04'
     # Upload artifacts
-    - name: Upload Artifact on MacOS
+    - name: Upload Artifact
       uses: actions/upload-artifact@v2
       with:
         name: ${{ matrix.os }}-artifacts
         path: ./build/dist/brln-[0-9]*.zip
-      if: matrix.os == 'macos-latest'
-    - name: Upload Artifact on Windows
-      uses: actions/upload-artifact@v2
-      with:
-        name: ${{ matrix.os }}-artifacts
-        path: |
-          ./build/dist/brln*.zip
-      if: matrix.os != 'windows-latest'
-    - name: Upload Artifact on Ubuntu
-      uses: actions/upload-artifact@v2
-      with:
-        name: ${{ matrix.os }}-artifacts
-        path: |
-          ./build/dist/brln-[0-9]*.zip
-      if: matrix.os == 'ubuntu-16.04'
