@@ -37,7 +37,7 @@ jobs:
       run: cmake ..
       working-directory: ./build
     - name: Build Binary Packages on MacOS/Windows
-      run: cmake --build . --target package
+      run: cmake --build . --config Release --target package
       working-directory: ./build
       if: matrix.os != 'ubuntu-16.04'
     - name: Build AppImage on Ubuntu
