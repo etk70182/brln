@@ -58,7 +58,7 @@ endforeach()
 
 # For macOS, the output directories form the app bundle; for all other
 # platforms, the output paths mirror the installation paths
-if(APPLE)
+if(APPLE AND MACOS_BUNDLE_FORMAT)
     set(CONTENTS_DIRECTORY "${CMAKE_BINARY_DIR}/brln.app/Contents")
     set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CONTENTS_DIRECTORY}/MacOS")
     set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CONTENTS_DIRECTORY}/Frameworks")
@@ -88,3 +88,5 @@ include(CMakeCPack)
 
 #configure package scripts
 configure_file(${PROJECT_SOURCE_DIR}/cmake/package-linux-appimage.sh.in ${PROJECT_SOURCE_DIR}/scripts/package-linux-appimage.sh @ONLY)
+configure_file(${PROJECT_SOURCE_DIR}/cmake/package-macos.sh.in ${PROJECT_SOURCE_DIR}/scripts/package-macos.sh @ONLY)
+configure_file(${PROJECT_SOURCE_DIR}/cmake/package-windows.bat.in ${PROJECT_SOURCE_DIR}/scripts/package-windows.bat @ONLY)

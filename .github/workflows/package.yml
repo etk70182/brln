@@ -10,6 +10,7 @@ jobs:
         os: [ubuntu-16.04, macos-latest, windows-latest]
     steps:
     - uses: actions/checkout@v2
+    # Install Qt5 and ALSA/Jack
     - name: Install Qt5
       uses: jurplel/install-qt-action@v2
     - name: Install ALSA/Jack - Ubuntu
@@ -18,14 +19,20 @@ jobs:
     - name: Install Jack - macOS
       run: brew install jack
       if: matrix.os == 'macos-latest'
+    # Configure, package source and build
     - name: Make Build Directory
       run: mkdir build
     - name: Make Install Directory
       run: mkdir install
       working-directory: ./build
-    - name: Configuration
+    - name: Configuration on MacOS
+      run: cmake .. -DENABLE_UNIT_TESTS=OFF -DMACOS_BUNDLE_FORMAT=ON
+      working-directory: ./build
+      if: matrix.os == 'macos-latest'
+    - name: Configuration on Ubuntu/Windows
       run: cmake .. -DENABLE_UNIT_TESTS=OFF
       working-directory: ./build
+      if: matrix.os != 'macos-latest'
     - name: Build Package Source
       run: cmake --build . --target package_source
       if: matrix.os == 'ubuntu-16.04'
@@ -36,35 +43,37 @@ jobs:
     - name: Refresh Cache
       run: cmake ..
       working-directory: ./build
-    - name: Build Binary Packages on MacOS/Windows
-      run: cmake --build . --config Release --target package
+    # Create packages
+    - name: Build Binary Packages on Windows
+      run: ../scripts/package-windows.bat .
       working-directory: ./build
-      if: matrix.os != 'ubuntu-16.04'
+      if: matrix.os == 'windows-latest'
+    - name: Build Binary Packages on MacOS
+      run: ../scripts/package-macos.sh .
+      working-directory: ./build
+      if: matrix.os != 'macos-latest'
     - name: Build AppImage on Ubuntu
       run: ../scripts/package-linux-appimage.sh .
       working-directory: ./build
       if: matrix.os == 'ubuntu-16.04'
+    # Upload artifacts
     - name: Upload Artifact on MacOS
       uses: actions/upload-artifact@v2
       with:
         name: ${{ matrix.os }}-artifacts
-        path: |
-          ./build/brln.dmg
-          ./LICENSE
-          ./pd
+        path: ./build/dist/brln-[0-9]*.zip
       if: matrix.os == 'macos-latest'
     - name: Upload Artifact on Windows
       uses: actions/upload-artifact@v2
       with:
         name: ${{ matrix.os }}-artifacts
         path: |
-          ./build/brln*.zip
+          ./build/dist/brln*.zip
       if: matrix.os != 'windows-latest'
     - name: Upload Artifact on Ubuntu
       uses: actions/upload-artifact@v2
       with:
         name: ${{ matrix.os }}-artifacts
         path: |
-          ./build/dist/brln*.zip
-          ./build/dist/brln*.deb
+          ./build/dist/brln-[0-9]*.zip
       if: matrix.os == 'ubuntu-16.04'

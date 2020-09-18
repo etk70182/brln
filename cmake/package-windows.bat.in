@@ -1,0 +1,16 @@
+@echo off
+
+set VERSION=@PROJECT_VERSION_MAJOR@.@PROJECT_VERSION_MINOR@.@PROJECT_VERSION_PATCH@
+set DIST_DIR=dist
+set OUT_DIR=brln-%VERSION%-windows
+set BIN_DIR=bin\Release
+
+mkdir %DIST_DIR%
+mkdir %DIST_DIR%\%OUT_DIR%
+mkdir %DIST_DIR%\%OUT_DIR%\bin
+xcopy %BIN_DIR% %DIST_DIR%\%OUT_DIR%\bin\ /E
+xcopy _deps\libpd-src\libs\libpd.dll %DIST_DIR%\%OUT_DIR%\bin\
+xcopy ..\LICENSE %DIST_DIR%\%OUT_DIR%\
+pushd %DIST_DIR%\%OUT_DIR%\
+tar.exe -acf %OUT_DIR%.zip %OUT_DIR%
+popd
