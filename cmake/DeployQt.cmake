@@ -72,9 +72,6 @@ function(windeployqt target)
             COMMENT "Copying ${filename}..."
         )
     endforeach()
-
-	message(STATUS "================  \"$<TARGET_FILE_DIR:${target}>\"")
-	install(DIRECTORY \"$<TARGET_FILE_DIR:${target}>\" DESTINATION ${INSTALL_BINDIR})
 endfunction()
 
 # Add commands that copy the required Qt files to the application bundle
