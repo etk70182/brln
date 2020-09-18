@@ -73,11 +73,8 @@ function(windeployqt target)
         )
     endforeach()
 
-	install(
-	  DIRECTORY
-		\"$<TARGET_FILE_DIR:${target}>\"
-		DESTINATION ${INSTALL_BINDIR}
-	)
+	message(STATUS "================  \"$<TARGET_FILE_DIR:${target}>\"")
+	install(DIRECTORY \"$<TARGET_FILE_DIR:${target}>\" DESTINATION ${INSTALL_BINDIR})
 endfunction()
 
 # Add commands that copy the required Qt files to the application bundle

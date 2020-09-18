@@ -18,7 +18,7 @@ set(CPACK_SOURCE_IGNORE_FILES
 	"${PROJECT_BINARY_DIR};/.git/;.gitignore;/.github/;CMakeLists.txt.user;.cproject;.project"
 )
 set(CPACK_SOURCE_GENERATOR "ZIP;TGZ")
-set(CPACK_GENERATOR "")
+set(CPACK_GENERATOR "ZIP;TGZ")
 
 if(UNIX)
   if(CMAKE_SYSTEM_NAME MATCHES Linux)

@@ -44,12 +44,22 @@ jobs:
       run: ../scripts/package-linux-appimage.sh .
       working-directory: ./build
       if: matrix.os == 'ubuntu-16.04'
-    - name: Upload Artifact on MacOS/Windows
+    - name: Upload Artifact on MacOS
       uses: actions/upload-artifact@v2
       with:
         name: ${{ matrix.os }}-artifacts
-        path: ./build/brln*
-      if: matrix.os != 'ubuntu-16.04'
+        path: |
+          ./build/brln.dmg
+          ./LICENSE
+          ./pd
+      if: matrix.os == 'macos-latest'
+    - name: Upload Artifact on Windows
+      uses: actions/upload-artifact@v2
+      with:
+        name: ${{ matrix.os }}-artifacts
+        path: |
+          ./build/brln*.zip
+      if: matrix.os != 'windows-latest'
     - name: Upload Artifact on Ubuntu
       uses: actions/upload-artifact@v2
       with:
