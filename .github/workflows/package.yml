@@ -49,9 +49,9 @@ jobs:
       working-directory: ./build
       if: matrix.os == 'windows-latest'
     - name: Build Binary Packages on MacOS
-      run: ../scripts/package-macos.sh .
+      run: ../scripts/package-macosx.sh .
       working-directory: ./build
-      if: matrix.os != 'macos-latest'
+      if: matrix.os == 'macos-latest'
     - name: Build AppImage on Ubuntu
       run: ../scripts/package-linux-appimage.sh .
       working-directory: ./build
