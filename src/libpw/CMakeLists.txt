@@ -49,8 +49,3 @@ PUBLIC
   libpd
   ${LIBPW_AUDIO_API}
 )
-
-if(CMAKE_SYSTEM_NAME STREQUAL "Windows")
-    include(DeployQt)
-    windeployqt(libpw)
-endif()
