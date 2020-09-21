@@ -67,7 +67,6 @@ install(FILES ${LIBPD_TARGETS} DESTINATION ${INSTALL_LIBDIR})
 if(CMAKE_SYSTEM_NAME STREQUAL "Windows")
     include(DeployQt)
     windeployqt(brln)
-    windeployqt(libpw)
 endif()
 
 if(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
