@@ -23,6 +23,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow) {
     ui->setupUi(this);
+    setWindowIcon(QIcon(":images/brln.png"));
     audioThread = new AudioThread(this);
     audioThread->start();
 }

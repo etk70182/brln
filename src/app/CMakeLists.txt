@@ -7,9 +7,9 @@ find_package(Qt5 COMPONENTS Widgets REQUIRED)
 set(APP_SOURCES main.cpp mainwindow.cpp audiothread.cpp)
 qt5_wrap_cpp(APP_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/mainwindow.cpp ${PROJECT_INCLUDE_DIR}/app/mainwindow.h)
 qt5_wrap_ui(UI_HEADERS ${CMAKE_CURRENT_SOURCE_DIR}/mainwindow.ui)
-
+qt5_add_resources(APP_RESOURCES ${CMAKE_SOURCE_DIR}/resources/resources.qrc)
 # main code
-add_executable(brln ${APP_SOURCES} ${UI_HEADERS})
+add_executable(brln ${APP_SOURCES} ${UI_HEADERS} ${APP_RESOURCES})
 
 target_include_directories(brln PUBLIC ${PROJECT_INCLUDE_DIR}/unallowedHeaders
                                                                                         ${PROJECT_INCLUDE_DIR}/app

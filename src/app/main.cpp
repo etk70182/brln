@@ -17,13 +17,20 @@
  */
 
 #include <QApplication>
+#include <QFile>
 #include <iostream>
 #include "mainwindow.h"
 #include "version.h"
 
 int main(int argc, char *argv[]) {
-    QApplication a(argc, argv);
-    MainWindow w;
-    w.show();
-    return a.exec();
+    QApplication app(argc, argv);
+    // Load an application style
+    QFile styleFile( ":/styles/brln.qss" );
+    styleFile.open( QFile::ReadOnly );
+    // Apply the loaded stylesheet
+    QString style( styleFile.readAll() );
+    qApp->setStyleSheet(style);
+    MainWindow window;
+    window.show();
+    return app.exec();
 }

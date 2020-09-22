@@ -19,6 +19,9 @@
 #ifndef INCLUDE_APP_AUDIOTHREAD_H_
 #define INCLUDE_APP_AUDIOTHREAD_H_
 #include <QThread>
+#include "PdBase.hpp"
+#include "RtAudio.h"
+#include "PdObject.h"
 
 class AudioThread : public QThread {
  public:
@@ -28,5 +31,10 @@ class AudioThread : public QThread {
 
     // overriding the QThread's run() method
     void run();
+ private:
+    RtAudio audio;
+    PdObject pdObject;
+    bool isThreadstopped;
+    void init();
 };
 #endif  // INCLUDE_APP_AUDIOTHREAD_H_

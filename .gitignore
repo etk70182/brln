@@ -1,4 +1,4 @@
 build
 .cproject
 .project
-scripts/package-linux-appimage.sh
+scripts/package*
