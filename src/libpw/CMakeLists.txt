@@ -6,7 +6,7 @@ fetch_git_repo(
 libpd
 ${CMAKE_BINARY_DIR}/_deps
 https://github.com/etk70182/libpd.git
-"7a1709e144de9f326f56d5d369d24c154d773083"
+"23ef53c280259921cd8396205e8191be647ab1c2"
 )
 
 # adds the targers: libpd_static, libpd
