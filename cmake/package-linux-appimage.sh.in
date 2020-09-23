@@ -4,6 +4,7 @@ mkdir -p brln.AppDir/usr/bin
 mkdir -p brln.AppDir/usr/lib
 mkdir -p brln.AppDir/usr/share
 cp bin/brln brln.AppDir/usr/bin/.
+cp -r bin/pd brln.AppDir/usr/bin/.
 cp _deps/libpd-src/libs/libpd.so brln.AppDir/usr/lib/.
 cp -r `dirname "$SCRIPT_PATH"`/../cmake/share brln.AppDir/usr/.
 cp `dirname "$SCRIPT_PATH"`/../cmake/share/applications/brln.desktop brln.AppDir/.
@@ -23,6 +24,5 @@ mkdir -p dist/brln-$VERSION-linux
 mv $brlnAppImage dist/brln-$VERSION-linux/brln
 mv brln-[0-9].* dist/.
 chmod +x dist/brln-$VERSION-linux/brln
-cp -r bin/pd dist/brln-$VERSION-linux/.
 cp `dirname "$SCRIPT_PATH"`/../LICENSE dist/brln-$VERSION-linux/.
 pushd dist && zip -r brln-$VERSION-linux.zip brln-$VERSION-linux/; popd
