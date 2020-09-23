@@ -28,9 +28,10 @@ class AudioThread : public QThread {
     // constructor
     // set name using initializer
     explicit AudioThread(QObject *parent = 0);
-
     // overriding the QThread's run() method
     void run();
+ slots:
+    void setFrequency(int frequency);
  private:
     RtAudio audio;
     PdObject pdObject;

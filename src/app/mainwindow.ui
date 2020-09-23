@@ -14,7 +14,7 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QDial" name="dial">
+   <widget class="QDial" name="frequencyDial">
     <property name="geometry">
      <rect>
       <x>9</x>

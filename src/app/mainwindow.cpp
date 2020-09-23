@@ -17,14 +17,21 @@
  *  along with brln.  If not, see <https://www.gnu.org/licenses/>.
  */
 #include "mainwindow.h"
+#include <QDial>
 #include "ui_mainwindow.h"
+
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow) {
     ui->setupUi(this);
     setWindowIcon(QIcon(":images/brln.png"));
+    QDial* frequencyDial = this->findChild<QDial *>("frequencyDial");
+    frequencyDial->setMaximum(0);
+    frequencyDial->setMaximum(127);
     audioThread = new AudioThread(this);
+    QObject::connect(frequencyDial, &QDial::valueChanged,
+                     audioThread, &AudioThread::setFrequency);
     audioThread->start();
 }
 

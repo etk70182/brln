@@ -1,4 +1,5 @@
 build
+scripts/package*
 .cproject
 .project
-scripts/package*
+CMakeLists.txt.user

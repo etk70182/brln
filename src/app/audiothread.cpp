@@ -35,9 +35,10 @@ AudioThread::AudioThread(QObject *parent) {
 void AudioThread::run() {
     AudioThread::init();
     // keep the program alive until it's killed with Ctrl+C
+    qDebug() << "Test";
+    lpd.sendFloat("FromCpp", 578);
     while (!isThreadstopped) {
        lpd.receiveMessages();
-       lpd.sendFloat("FromCpp", 578);
        QThread::msleep(100);
     }
 }
@@ -55,7 +56,7 @@ void AudioThread::init() {
 
     // receive messages from pd
     lpd.setReceiver(&pdObject);
-    lpd.subscribe("cursor");
+    lpd.subscribe("frequencyInput");
 
     // send DSP 1 message to pd
     lpd.computeAudio(true);
@@ -94,6 +95,10 @@ void AudioThread::init() {
        isThreadstopped = true;
        return;
     }
+}
+
+void AudioThread::setFrequency(int frequency) {
+    lpd.sendFloat("frequencyInput", frequency);
 }
 
 int audioCallback(void *outputBuffer, void *inputBuffer,

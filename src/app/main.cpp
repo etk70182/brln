@@ -22,15 +22,19 @@
 #include "mainwindow.h"
 #include "version.h"
 
+QString loadStyle();
+
 int main(int argc, char *argv[]) {
     QApplication app(argc, argv);
-    // Load an application style
-    QFile styleFile( ":/styles/brln.qss" );
-    styleFile.open( QFile::ReadOnly );
-    // Apply the loaded stylesheet
-    QString style( styleFile.readAll() );
+    QString style = loadStyle();
     qApp->setStyleSheet(style);
     MainWindow window;
     window.show();
     return app.exec();
+}
+
+QString loadStyle() {
+    QFile styleFile(":/styles/brln.qss");
+    styleFile.open(QFile::ReadOnly);
+    return styleFile.readAll();
 }
