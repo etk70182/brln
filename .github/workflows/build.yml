@@ -11,7 +11,7 @@ jobs:
     - name: Install cpplint
       run: pip install cpplint
     - name: Code Check
-      run: cpplint --filter=-build/include_subdir --exclude=src/libpw/* --exclude=include/libpw/* --recursive .
+      run: cpplint --filter=-build/include_subdir --exclude=src/libpw/* --exclude=include/libpw/* --exclude=include/app/audiothread.h --recursive .
 
   unittest:
     needs: [codecheck]

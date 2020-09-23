@@ -30,12 +30,12 @@ class AudioThread : public QThread {
     explicit AudioThread(QObject *parent = 0);
     // overriding the QThread's run() method
     void run();
- slots:
-    void setFrequency(int frequency);
  private:
     RtAudio audio;
     PdObject pdObject;
     bool isThreadstopped;
     void init();
+ public slots:
+    void setFrequency(int frequency);
 };
 #endif  // INCLUDE_APP_AUDIOTHREAD_H_
