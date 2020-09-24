@@ -59,4 +59,4 @@ PUBLIC
   libpd
   ${LIBPW_AUDIO_API}
 )
-endif
+endif()
