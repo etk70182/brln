@@ -28,12 +28,21 @@ macro(fetch_git_repo _project_name _download_root _git_url _git_tag)
   unset(FETCH_GIT_TAG)
 
   # configure sub-project
-  execute_process(
-    COMMAND
-      "${CMAKE_COMMAND}" -G "${CMAKE_GENERATOR}" .
-    WORKING_DIRECTORY
-      ${_download_root}
+  if(${_project_name} STREQUAL "libpd" AND MSVC)
+    execute_process(
+      COMMAND
+        "${CMAKE_COMMAND}" -DPD_MULTI=ON -DPD_UTILS=OFF -DMSVC_STATIC_RUNTIME=ON -G "${CMAKE_GENERATOR}" .
+      WORKING_DIRECTORY
+        ${_download_root}
     )
+  else()
+    execute_process(
+      COMMAND
+        "${CMAKE_COMMAND}" -G "${CMAKE_GENERATOR}" .
+      WORKING_DIRECTORY
+        ${_download_root}
+    )
+  endif()
 
   # build sub-project which triggers ExternalProject_Add
   execute_process(
