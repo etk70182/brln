@@ -46,11 +46,8 @@ PUBLIC
 
 if(MSVC)
 target_link_libraries(libpw
-STATIC
-  libpd-multi-static
-)
-target_link_libraries(libpw
 PUBLIC
+  libpd-multi-static
   ${LIBPW_AUDIO_API}
 )
 else()
