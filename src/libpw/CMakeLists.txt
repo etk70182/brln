@@ -44,8 +44,10 @@ PUBLIC
   ${LIBPW_COMPILE_FLAGS}
 )
 
+set( LIBPD_LIB libpd PARENT_SCOPE )
+
 target_link_libraries(libpw
 PUBLIC
-  libpd
+  ${LIBPD_LIB}
   ${LIBPW_AUDIO_API}
 )
