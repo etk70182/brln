@@ -7,7 +7,8 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-16.04, macos-latest, windows-latest]
+        os: [windows-latest]
+        #os: [ubuntu-16.04, macos-latest, windows-latest]
     steps:
     - uses: actions/checkout@v2
     # Install Qt5 and ALSA/Jack
@@ -62,6 +63,6 @@ jobs:
       with:
         name: ${{ matrix.os }}-artifacts
         path: |
-          ./build/
-          ./build/dist/brln-[0-9]*.zip
-        if-no-files-found: error
+          ./build
+    #      ./build/dist/brln-[0-9]*.zip
+    #    if-no-files-found: error
