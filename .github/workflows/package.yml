@@ -35,7 +35,7 @@ jobs:
       working-directory: ./build
       if: matrix.os == 'macos-latest'
     - name: Configuration on Windows
-      run: cmake .. -DENABLE_UNIT_TESTS=OFF -DPD_MULTI=ON -DPD_UTILS=OFF -DMSVC_STATIC_RUNTIME=ON
+      run: cmake .. -DENABLE_UNIT_TESTS=OFF -DPD_MULTI=ON -DPD_UTILS=OFF -DMSVC_STATIC_RUNTIME=ON --trace-expand
       working-directory: ./build
       if: matrix.os == 'windows-latest'
     - name: Build Package Source
@@ -43,7 +43,7 @@ jobs:
       if: matrix.os == 'ubuntu-16.04'
       working-directory: ./build
     - name: Build
-      run: cmake --build . --config Release --trace-expand
+      run: cmake --build . --config Release
       working-directory: ./build
     - name: Refresh Cache
       run: cmake ..
