@@ -61,5 +61,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: ${{ matrix.os }}-artifacts
-        path: ./build/dist/brln-[0-9]*.zip
+        path: |
+          ./build/
+          ./build/dist/brln-[0-9]*.zip
         if-no-files-found: error
