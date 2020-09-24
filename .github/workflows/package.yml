@@ -26,14 +26,18 @@ jobs:
     - name: Make Install Directory
       run: mkdir install
       working-directory: ./build
+    - name: Configuration on Ubuntu
+      run: cmake .. -DENABLE_UNIT_TESTS=OFF
+      working-directory: ./build
+      if: matrix.os == 'ubuntu-16.04'
     - name: Configuration on MacOS
       run: cmake .. -DENABLE_UNIT_TESTS=OFF -DMACOS_BUNDLE_FORMAT=ON
       working-directory: ./build
       if: matrix.os == 'macos-latest'
-    - name: Configuration on Ubuntu/Windows
-      run: cmake .. -DENABLE_UNIT_TESTS=OFF
+    - name: Configuration on Windows
+      run: cmake .. -DENABLE_UNIT_TESTS=OFF -DPD_MULTI=ON -DPD_UTILS=OFF -DMSVC_STATIC_RUNTIME=ON
       working-directory: ./build
-      if: matrix.os != 'macos-latest'
+      if: matrix.os == 'windows-latest'
     - name: Build Package Source
       run: cmake --build . --target package_source
       if: matrix.os == 'ubuntu-16.04'
@@ -62,7 +66,5 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: ${{ matrix.os }}-artifacts
-        path: |
-          ./build
-    #      ./build/dist/brln-[0-9]*.zip
-    #    if-no-files-found: error
+        path: ./build/dist/brln-[0-9]*.zip
+        if-no-files-found: error
