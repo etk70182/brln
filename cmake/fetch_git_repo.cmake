@@ -28,22 +28,12 @@ macro(fetch_git_repo _project_name _download_root _git_url _git_tag)
   unset(FETCH_GIT_TAG)
 
   # configure sub-project
-  if(${_project_name} STREQUAL "libpd" AND MSVC)
-    message(STATUS "Configuring libpd for Visual Studio with options set to PD_MULTI=ON, PD_UTILS=OFF, and MSVC_STATIC_RUNTIME=ON")
-    execute_process(
-      COMMAND
-        "${CMAKE_COMMAND}" -DPD_MULTI=ON -DPD_UTILS=OFF -DMSVC_STATIC_RUNTIME=ON -G "${CMAKE_GENERATOR}" .
-      WORKING_DIRECTORY
-        ${_download_root}
-    )
-  else()
-    execute_process(
-      COMMAND
-        "${CMAKE_COMMAND}" -G "${CMAKE_GENERATOR}" .
-      WORKING_DIRECTORY
-        ${_download_root}
-    )
-  endif()
+  execute_process(
+    COMMAND
+      "${CMAKE_COMMAND}" -G "${CMAKE_GENERATOR}" .
+    WORKING_DIRECTORY
+      ${_download_root}
+  )
 
   # build sub-project which triggers ExternalProject_Add
   execute_process(
