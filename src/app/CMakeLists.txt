@@ -15,7 +15,7 @@ target_include_directories(brln PUBLIC ${PROJECT_INCLUDE_DIR}/unallowedHeaders
                                                                                         ${PROJECT_INCLUDE_DIR}/app
                                                                                         ${CMAKE_CURRENT_BINARY_DIR})
 
-target_link_libraries(brln PUBLIC libpw Qt5::Widgets)
+target_link_libraries(brln PUBLIC libpw ${LIBPD_LIB} Qt5::Widgets)
 
 add_custom_command(TARGET brln POST_BUILD
                    COMMAND ${CMAKE_COMMAND} -E copy_directory
