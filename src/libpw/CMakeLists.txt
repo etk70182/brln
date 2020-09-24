@@ -44,16 +44,8 @@ PUBLIC
   ${LIBPW_COMPILE_FLAGS}
 )
 
-if(MSVC)
-target_link_libraries(libpw
-PUBLIC
-  libpd-static
-  ${LIBPW_AUDIO_API}
-)
-else()
 target_link_libraries(libpw
 PUBLIC
   libpd
   ${LIBPW_AUDIO_API}
 )
-endif()
