@@ -29,6 +29,7 @@ macro(fetch_git_repo _project_name _download_root _git_url _git_tag)
 
   # configure sub-project
   if(${_project_name} STREQUAL "libpd" AND MSVC)
+    message(STATUS "Configuring libpd for Visual Studio with options set to PD_MULTI=ON, PD_UTILS=OFF, and MSVC_STATIC_RUNTIME=ON")
     execute_process(
       COMMAND
         "${CMAKE_COMMAND}" -DPD_MULTI=ON -DPD_UTILS=OFF -DMSVC_STATIC_RUNTIME=ON -G "${CMAKE_GENERATOR}" .
