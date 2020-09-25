@@ -44,10 +44,11 @@ PUBLIC
   ${LIBPW_COMPILE_FLAGS}
 )
 
-set( LIBPD_LIB libpd PARENT_SCOPE )
+set( LIBPD_LIB $<TARGET_FILE:libpd> PARENT_SCOPE )
+message(STATUS "libpd target is set to: ${LIBPD_LIB}")
 
 target_link_libraries(libpw
 PUBLIC
-  ${LIBPD_LIB}
+  libpd
   ${LIBPW_AUDIO_API}
 )

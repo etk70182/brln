@@ -28,12 +28,22 @@ macro(fetch_git_repo _project_name _download_root _git_url _git_tag)
   unset(FETCH_GIT_TAG)
 
   # configure sub-project
+  if(${_project_name} STREQUAL "libpd")
+  message(STATUS "Fetching git repo for libpd.")
+  execute_process(
+    COMMAND
+      "${CMAKE_COMMAND}" -DPD_UTILS=OFF -DPD_MULTI=ON -G "${CMAKE_GENERATOR}" .
+    WORKING_DIRECTORY
+      ${_download_root}
+  )
+  else()
   execute_process(
     COMMAND
       "${CMAKE_COMMAND}" -G "${CMAKE_GENERATOR}" .
     WORKING_DIRECTORY
       ${_download_root}
   )
+  endif()
 
   # build sub-project which triggers ExternalProject_Add
   execute_process(

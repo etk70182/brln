@@ -7,8 +7,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [windows-latest]
-        #os: [ubuntu-16.04, macos-latest, windows-latest]
+        os: [ubuntu-16.04, macos-latest, windows-latest]
     steps:
     - uses: actions/checkout@v2
     # Install Qt5 and ALSA/Jack
@@ -26,18 +25,14 @@ jobs:
     - name: Make Install Directory
       run: mkdir install
       working-directory: ./build
-    - name: Configuration on Ubuntu
-      run: cmake .. -DENABLE_UNIT_TESTS=OFF
-      working-directory: ./build
-      if: matrix.os == 'ubuntu-16.04'
     - name: Configuration on MacOS
       run: cmake .. -DENABLE_UNIT_TESTS=OFF -DMACOS_BUNDLE_FORMAT=ON
       working-directory: ./build
       if: matrix.os == 'macos-latest'
-    - name: Configuration on Windows
-      run: cmake .. -DENABLE_UNIT_TESTS=OFF -DPD_MULTI=ON -DPD_UTILS=OFF -DMSVC_STATIC_RUNTIME=ON --trace-expand
+    - name: Configuration on Ubuntu/Windows
+      run: cmake .. -DENABLE_UNIT_TESTS=OFF
       working-directory: ./build
-      if: matrix.os == 'windows-latest'
+      if: matrix.os != 'macos-latest'
     - name: Build Package Source
       run: cmake --build . --target package_source
       if: matrix.os == 'ubuntu-16.04'
