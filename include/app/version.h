@@ -22,5 +22,7 @@
 #define APP_VERSION_MAJOR 0
 #define APP_VERSION_MINOR 1
 #define APP_VERSION_PATCH 0
+#define APP_NAME "brln"
+#define APP_VERSION "0.1.0"
 
 #endif  // INCLUDE_APP_VERSION_H_

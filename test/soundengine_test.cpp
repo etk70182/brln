@@ -16,13 +16,16 @@
  *  You should have received a copy of the GNU General Public License
  *  along with brln.  If not, see <https://www.gnu.org/licenses/>.
  */
-#include "sum_integers.hpp"
-#include <vector>
+#include "gtest/gtest.h"
+#include "soundengine.h"
 
-int sum_integers(const std::vector<int> integers) {
-  auto sum = 0;
-  for (auto i : integers) {
-    sum += i;
+TEST(TestCaseSoundEnginge, TestSoundEngine) {
+  auto soundEngine = SoundEngine::instance();
+  auto status = soundEngine.init("./pd");
+  ASSERT_EQ(EngineStatus::ready, status);
+  for (int i = 0; i < 10; i++) {
+      soundEngine.set("frequencyInput", i);
+      soundEngine.update();
+      ASSERT_EQ(i, soundEngine.get("frequencyInput"));
   }
-  return sum;
 }

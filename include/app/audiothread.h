@@ -19,23 +19,16 @@
 #ifndef INCLUDE_APP_AUDIOTHREAD_H_
 #define INCLUDE_APP_AUDIOTHREAD_H_
 #include <QThread>
-#include "PdBase.hpp"
-#include "RtAudio.h"
-#include "PdObject.h"
+#include "qttypes.h"
+#include "soundengine.h"
 
 class AudioThread : public QThread {
  public:
-    // constructor
-    // set name using initializer
     explicit AudioThread(QObject *parent = 0);
-    // overriding the QThread's run() method
     void run();
  private:
-    RtAudio audio;
-    PdObject pdObject;
-    bool isThreadstopped;
-    void init();
- public slots:
+    SoundEngine engine;
+ PUBLIC_SLOTS:
     void setFrequency(int frequency);
 };
 #endif  // INCLUDE_APP_AUDIOTHREAD_H_

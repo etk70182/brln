@@ -1,6 +1,0 @@
-set( PROJECT_ROOT_DIR ${PROJECT_ROOT_DIR} PARENT_SCOPE )
-set( PROJECT_INCLUDE_DIR ${PROJECT_INCLUDE_DIR} PARENT_SCOPE )
-
-add_library(sum_integers sum_integers.cpp)
-
-target_include_directories(sum_integers PUBLIC ${PROJECT_INCLUDE_DIR}/Template)

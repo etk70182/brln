@@ -18,19 +18,36 @@
 
 #include <QApplication>
 #include <QFile>
+#include <QCommandLineParser>
 #include <iostream>
 #include "mainwindow.h"
 #include "version.h"
 
+void setProgrammOptions(QApplication* app);
 QString loadStyle();
 
 int main(int argc, char *argv[]) {
     QApplication app(argc, argv);
+    setProgrammOptions(&app);
     QString style = loadStyle();
-    qApp->setStyleSheet(style);
+    app.setStyleSheet(style);
     MainWindow window;
     window.show();
     return app.exec();
+}
+
+void setProgrammOptions(QApplication* app) {
+    app->setApplicationName(APP_NAME);
+    app->setApplicationDisplayName(APP_NAME);
+    app->setApplicationVersion(APP_VERSION);
+    QString applicationDescription =
+            APP_NAME" is a free software synthesizer\n"
+            "under the GPLv3.";
+    QCommandLineParser parser;
+    parser.setApplicationDescription(applicationDescription);
+    parser.addHelpOption();
+    parser.addVersionOption();
+    parser.process(*app);
 }
 
 QString loadStyle() {

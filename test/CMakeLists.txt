@@ -33,13 +33,11 @@ add_executable(unit_tests "")
 
 target_sources(unit_tests
 PRIVATE
-  test.hpp
-  test.cpp
+  soundengine_test.cpp
 )
 
 target_link_libraries(unit_tests
 PRIVATE
-  sum_integers
   libpw
   gtest_main
 )
@@ -48,6 +46,8 @@ add_test(
 NAME unit_tests
 COMMAND $<TARGET_FILE:unit_tests>
 )
+set_tests_properties(unit_tests PROPERTIES
+        WORKING_DIRECTORY $<TARGET_FILE_DIR:unit_tests>)
 
 include(CodeCoverage)
 

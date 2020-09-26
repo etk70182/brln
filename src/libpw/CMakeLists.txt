@@ -15,7 +15,7 @@ ${libpd_SOURCE_DIR}
 ${libpd_BINARY_DIR}
 )
 
-add_library(libpw PdObject.cpp RtAudio.cpp)
+add_library(libpw patchsignalreceiver.cpp RtAudio.cpp soundengine.cpp)
 
 target_include_directories(libpw PUBLIC ${PROJECT_INCLUDE_DIR}/libpw
 											   ${libpd_SOURCE_DIR}/cpp
