@@ -28,7 +28,7 @@ class AudioThread : public QThread {
     void run();
  private:
     SoundEngine engine;
- PUBLIC_SLOTS:
+ PUBLICSLOTS:
     void setFrequency(int frequency);
 };
 #endif  // INCLUDE_APP_AUDIOTHREAD_H_

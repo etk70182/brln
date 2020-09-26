@@ -18,4 +18,4 @@
  */
 #pragma once
 
-#define PUBLIC_SLOTS public slots
+#define PUBLICSLOTS public slots
