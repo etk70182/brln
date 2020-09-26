@@ -22,10 +22,14 @@
 TEST(TestCaseSoundEnginge, TestSoundEngine) {
   auto soundEngine = SoundEngine::instance();
   auto status = soundEngine.init("./pd");
+#ifdef CONTAINER_ENV
+  ASSERT_EQ(EngineStatus::noSoundDevices, status);
+#else
   ASSERT_EQ(EngineStatus::ready, status);
   for (int i = 0; i < 10; i++) {
       soundEngine.set("frequencyInput", i);
       soundEngine.update();
       ASSERT_EQ(i, soundEngine.get("frequencyInput"));
   }
+#endif
 }

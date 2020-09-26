@@ -29,6 +29,15 @@ foreach(_tgt gtest gtest_main gmock gmock_main)
 endforeach()
 endif()
 
+
+message(STATUS "Unit Tests set to:")
+if(CONTAINER_ENV_DEFINITIONS)
+message(STATUS "Container environment")
+add_definitions(-DCONTAINER_ENV)
+else()
+message(STATUS "Local environment")
+endif()
+
 add_executable(unit_tests "")
 
 target_sources(unit_tests

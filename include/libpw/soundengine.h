@@ -22,7 +22,8 @@
 #include "RtAudio.h"
 #include "patchsignalreceiver.h"
 
-enum EngineStatus { ready, uninitialized };
+enum EngineStatus { ready, uninitialized, patchInvalid, noSoundDevices,
+                  thrownError };
 
 class SoundEngine {
  public:

@@ -16,7 +16,7 @@ jobs:
     - name: Make Build Directory
       run: mkdir build
     - name: Configuration
-      run: cmake .. -DCMAKE_BUILD_TYPE=Coverage
+      run: cmake .. -DCONTAINER_ENV=ON -DCMAKE_BUILD_TYPE=Coverage -Wno-dev
       working-directory: ./build
     - name: Generate coverage
       run: cmake --build . --target coverage

@@ -78,6 +78,11 @@ add_subdirectory(src)
 # make it possible to disable unit tests when not on network
 option(ENABLE_UNIT_TESTS "Enable unit tests" ON)
 message(STATUS "Enable testing: ${ENABLE_UNIT_TESTS}")
+option(CONTAINER_ENV "Configuration for container environment" OFF)
+message(STATUS "Configuration for container environment: ${ENABLE_UNIT_TESTS}")
+if(CONTAINER_ENV)
+	set(CONTAINER_ENV_DEFINITIONS ON)
+endif()
 
 if(ENABLE_UNIT_TESTS)
   enable_testing()

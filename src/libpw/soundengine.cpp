@@ -68,14 +68,12 @@ EngineStatus SoundEngine::init(std::string const & patchDirectory) {
     // load the patch
     pd::Patch patch = lpd.openPatch("brln.pd", patchDirectory);
     if (!patch.isValid()) {
-        std::cout << patch << std::endl;
-        return EngineStatus::uninitialized;
+        return EngineStatus::patchInvalid;
     }
 
     // use the RtAudio API to connect to the default audio device
     if (audio.getDeviceCount() == 0) {
-       std::cout << "There are no available sound devices." << std::endl;
-       return EngineStatus::uninitialized;
+       return EngineStatus::noSoundDevices;
     }
 
     RtAudio::StreamParameters parameters;
@@ -93,7 +91,7 @@ EngineStatus SoundEngine::init(std::string const & patchDirectory) {
     catch(RtAudioError& e) {
        std::cerr << e.getMessage() << std::endl;
        if (audio.isStreamOpen()) audio.closeStream();
-       return EngineStatus::uninitialized;
+       return EngineStatus::thrownError;
     }
     return EngineStatus::ready;
 }
