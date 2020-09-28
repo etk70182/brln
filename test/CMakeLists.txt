@@ -4,7 +4,7 @@ fetch_git_repo(
 googletest
 ${CMAKE_BINARY_DIR}/_deps
 https://github.com/google/googletest.git
-release-1.8.0
+release-1.10.0
 )
 
 # Prevent GoogleTest from overriding our compiler/linker options
