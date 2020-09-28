@@ -19,7 +19,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
+        os: [windows-latest]#[ubuntu-latest, macos-latest, windows-latest]
     steps:
     - uses: actions/checkout@v2
     - name: Install Qt5
@@ -39,7 +39,8 @@ jobs:
       run: cmake --build .
       working-directory: ./build
     - name: Unit Test
-      run: ./unit_tests
+      run: unit_tests.exe
+      if: matrix.os == 'windows-latest'
       working-directory: ./build/bin
     - name: Unit Test
       run: ctest -V -C Debug
