@@ -28,13 +28,13 @@ enum EngineStatus { ready, uninitialized, patchInvalid, noSoundDevices,
 class SoundEngine {
  public:
     static SoundEngine& instance();
+    SoundEngine();
     ~SoundEngine();
     void update();
     void set(std::string const & key, int const & value);
     float get(std::string const & key);
     EngineStatus init(std::string const& patchDirectory);
  private:
-    SoundEngine();
     RtAudio audio;
     PatchSignalReceiver patchSignalReceiver;
 };
