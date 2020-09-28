@@ -32,13 +32,17 @@ endif()
 
 message(STATUS "Unit Tests set to:")
 if(CONTAINER_ENV_DEFINITIONS)
-message(STATUS "Container environment")
-add_definitions(-DCONTAINER_ENV)
+	message(STATUS "Container environment")
+	add_definitions(-DCONTAINER_ENV -Dgtest_disable_pthreads=OFF)
 else()
-message(STATUS "Local environment")
+	message(STATUS "Local environment")
+	add_definitions(-Dgtest_disable_pthreads=OFF)
 endif()
 
 add_executable(unit_tests "")
+
+add_custom_command(TARGET unit_tests PRE_BUILD
+	COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/pd/ ${CMAKE_BINARY_DIR}/pd/)
 
 target_sources(unit_tests
 PRIVATE
@@ -55,8 +59,9 @@ add_test(
 NAME unit_tests
 COMMAND $<TARGET_FILE:unit_tests>
 )
+
 set_tests_properties(unit_tests PROPERTIES
-        WORKING_DIRECTORY $<TARGET_FILE_DIR:unit_tests>)
+        WORKING_DIRECTORY ${CMAKE_BINARY_DIR})
 
 include(CodeCoverage)
 
