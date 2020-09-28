@@ -39,5 +39,8 @@ jobs:
       run: cmake --build .
       working-directory: ./build
     - name: Unit Test
+      run: ./unit_tests
+      working-directory: ./build/bin
+    - name: Unit Test
       run: ctest -V -C Debug
       working-directory: ./build
