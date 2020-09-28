@@ -26,8 +26,8 @@ static int audioCallback(void *outputBuffer, void *inputBuffer,
                   RtAudioStreamStatus status, void *userData);
 
 SoundEngine& SoundEngine::instance() {
-    static std::unique_ptr<SoundEngine> single( new SoundEngine() );
-    return *single;
+    static SoundEngine instance;
+    return instance;
 }
 
 SoundEngine::SoundEngine() {
