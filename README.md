@@ -21,7 +21,21 @@ _brln_ started at the beginning of 2020 and is therefore still a very young proj
 
 #### Prerequisites
 
+In order to build from source you need to install some prerequisites on your machine such as [Qt](https://www.qt.io/) and potentially some audio libraries.
+
 ##### Install Qt
+
+This project makes use of the Qt-framework so therefore you need to have Qt installed on your machine in order to build the project.
+
+* Ubuntu
+
+  ```
+  sudo apt-get install qt5-default
+  ```
+
+* MacOS/Windows
+
+  For installing Qt on your MacOS or Windows machine please go to the [Official Qt Download](https://www.qt.io/download).
 
 ##### Install ALSA/Jack on Ubuntu
 
@@ -38,21 +52,37 @@ brew install jack
 
 #### Build the Project
 
+After you have installed the prerequisites for your machine we can download the repository from the GitHub server and build it.
+
 ```
 git clone https://github.com/etk70182/brln.git
 ```
+Change the directory and make a new build directory in it so we can build out of source.
 
 ```
 cd brln
 mkdir build
 cd build
 ```
+As a next step configure the project depending on your machine, compiler, and build tool.
 
 ```
 cmake ..
 ```
-
+Afterwards compile it.
 ```
 cmake --build .
 ```
 
+### Author
+
+- [André Schlinke](https://github.com/etk70182)
+
+### Credits
+
+- [Pure Data](http://msp.ucsd.edu/software.html) by Miller Puckette and others
+- [libpd](http://libpd.cc) by the Peter Brinkmann, Dan Wilcox and others
+- [RtAudio](https://github.com/thestk/rtaudio) by Gary P. Scavone and others
+- [googletest](https://github.com/google/googletest) by Google LLC
+- [Qt](https://www.qt.io/) by Digia
+- [CMake](https://cmake.org/) by Andy Cedilnik, Bill Hoffman, Brad King, Ken Martin, Alexander Neundorf
