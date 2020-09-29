@@ -20,7 +20,7 @@
 #include "soundengine.h"
 
 TEST(TestCaseSoundEnginge, TestSoundEngine) {
-  auto soundEngine = SoundEngine();
+  //auto soundEngine = SoundEngine();
   /*
   auto status = soundEngine.init("./pd");
 #ifdef CONTAINER_ENV
