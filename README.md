@@ -3,6 +3,10 @@
   <h2 align="center">A Free Software Synthesizer</h2>
 </p>
 
+# BRLN
+![](https://github.com/etk70182/brln/workflows/Build%20and%20Unit%20Testing/badge.svg)
+## Open Source Synthesizer
+
 ![](https://github.com/etk70182/brln/workflows/build/badge.svg)
 [![Coverage Status](https://coveralls.io/repos/github/etk70182/brln/badge.svg?branch=feature_branch)](https://coveralls.io/github/etk70182/brln?branch=feature_branch)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
