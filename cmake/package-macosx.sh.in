@@ -1,0 +1,12 @@
+#!/bin/bash
+SCRIPT_PATH="${BASH_SOURCE[0]}"
+pushd $1
+export VERSION="@PROJECT_VERSION_MAJOR@.@PROJECT_VERSION_MINOR@.@PROJECT_VERSION_PATCH@"
+mkdir -p dist/brln-$VERSION-macosx
+cp brln.dmg dist/brln-$VERSION-macosx/.
+cp -r `dirname "$SCRIPT_PATH"`/../pd dist/brln-$VERSION-macosx/.
+cp `dirname "$SCRIPT_PATH"`/../LICENSE dist/brln-$VERSION-macosx/.
+pushd dist
+zip -r brln-$VERSION-macosx.zip brln-$VERSION-macosx/; popd
+popd
+

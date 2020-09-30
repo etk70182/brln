@@ -1,0 +1,48 @@
+name: build
+on: [push, pull_request]
+
+jobs:
+  codecheck:
+    name: Code Check Stage
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - uses: actions/setup-python@v1
+    - name: Install cpplint
+      run: pip install cpplint
+    - name: Code Check
+      run: cpplint --filter=-build/include_subdir --exclude=src/libpw/RtAudio.cpp --exclude=include/libpw/RtAudio.h --exclude=include/app/audiothread.h --recursive .
+
+  unittest:
+    needs: [codecheck]
+    name: Unit Test Stage
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install Qt5
+      uses: jurplel/install-qt-action@v2
+    - name: Install ALSA/Jack - Ubuntu
+      run: sudo apt-get update -y; sudo apt-get install -y libjack-dev libasound2-dev
+      if: matrix.os == 'ubuntu-latest'
+    - name: Install Jack - macOS
+      run: brew install jack
+      if: matrix.os == 'macos-latest'
+    - name: Make Build Directory
+      run: mkdir build
+    - name: Configuration on MacOS
+      run: cmake .. -Wno-dev
+      working-directory: ./build
+      if: matrix.os == 'macos-latest'
+    - name: Configuration on Ubuntu/Windows
+      run: cmake .. -DCONTAINER_ENV=ON -Wno-dev
+      working-directory: ./build
+      if: matrix.os != 'macos-latest'
+    - name: Build
+      run: cmake --build .
+      working-directory: ./build
+    - name: Unit Test
+      run: ctest -V -C Debug
+      working-directory: ./build

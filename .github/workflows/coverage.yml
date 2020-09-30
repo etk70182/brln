@@ -1,0 +1,28 @@
+name: coverage
+on: [push, pull_request]
+
+jobs:
+  codecheck:
+    name: Code Coverage Stage
+    runs-on: ubuntu-latest
+    steps:
+    - name: Install lcov
+      run: sudo apt-get install -y lcov
+    - uses: actions/checkout@v2
+    - name: Install Qt
+      uses: jurplel/install-qt-action@v2
+    - name: Install libjack-dev & libasound2-dev
+      run: sudo apt-get update -y; sudo apt-get install -y libjack-dev libasound2-dev
+    - name: Make Build Directory
+      run: mkdir build
+    - name: Configuration
+      run: cmake .. -DCONTAINER_ENV=ON -DCMAKE_BUILD_TYPE=Coverage -Wno-dev
+      working-directory: ./build
+    - name: Generate coverage
+      run: cmake --build . --target coverage
+      working-directory: ./build
+    - name: Coveralls
+      uses: coverallsapp/github-action@master
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        path-to-lcov: ./build/coverage.info.cleaned

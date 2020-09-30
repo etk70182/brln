@@ -1,0 +1,6 @@
+<!DOCTYPE RCC><RCC version="1.0">
+<qresource>
+    <file>styles/brln.qss</file>
+	<file>images/brln.png</file>
+</qresource>
+</RCC>

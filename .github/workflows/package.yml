@@ -1,0 +1,65 @@
+name: package
+on: [push, pull_request]
+
+jobs:
+  package-source:
+    name: Package Source
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-16.04, macos-latest, windows-latest]
+    steps:
+    - uses: actions/checkout@v2
+    # Install Qt5 and ALSA/Jack
+    - name: Install Qt5
+      uses: jurplel/install-qt-action@v2
+    - name: Install ALSA/Jack - Ubuntu
+      run: sudo apt-get update -y; sudo apt-get install -y libjack-dev libasound2-dev
+      if: matrix.os == 'ubuntu-16.04'
+    - name: Install Jack - macOS
+      run: brew install jack
+      if: matrix.os == 'macos-latest'
+    # Configure, package source and build
+    - name: Make Build Directory
+      run: mkdir build
+    - name: Make Install Directory
+      run: mkdir install
+      working-directory: ./build
+    - name: Configuration on MacOS
+      run: cmake .. -DENABLE_UNIT_TESTS=OFF -DMACOS_BUNDLE_FORMAT=ON
+      working-directory: ./build
+      if: matrix.os == 'macos-latest'
+    - name: Configuration on Ubuntu/Windows
+      run: cmake .. -DENABLE_UNIT_TESTS=OFF
+      working-directory: ./build
+      if: matrix.os != 'macos-latest'
+    - name: Build Package Source
+      run: cmake --build . --target package_source
+      if: matrix.os == 'ubuntu-16.04'
+      working-directory: ./build
+    - name: Build
+      run: cmake --build . --config Release
+      working-directory: ./build
+    - name: Refresh Cache
+      run: cmake ..
+      working-directory: ./build
+    # Create packages
+    - name: Build Binary Packages on Windows
+      run: ../scripts/package-windows.bat .
+      working-directory: ./build
+      if: matrix.os == 'windows-latest'
+    - name: Build Binary Packages on MacOS
+      run: ../scripts/package-macosx.sh .
+      working-directory: ./build
+      if: matrix.os == 'macos-latest'
+    - name: Build AppImage on Ubuntu
+      run: ../scripts/package-linux-appimage.sh .
+      working-directory: ./build
+      if: matrix.os == 'ubuntu-16.04'
+    # Upload artifacts
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: ${{ matrix.os }}-artifacts
+        path: ./build/dist/brln-[0-9]*.zip
+        if-no-files-found: error
