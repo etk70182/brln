@@ -32,9 +32,14 @@ jobs:
       if: matrix.os == 'macos-latest'
     - name: Make Build Directory
       run: mkdir build
-    - name: Configuration
+    - name: Configuration on MacOS
+      run: cmake .. -Wno-dev
+      working-directory: ./build
+      if: matrix.os == 'macos-latest'
+    - name: Configuration on Ubuntu/Windows
       run: cmake .. -DCONTAINER_ENV=ON -Wno-dev
       working-directory: ./build
+      if: matrix.os != 'macos-latest'
     - name: Build
       run: cmake --build .
       working-directory: ./build
