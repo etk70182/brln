@@ -80,7 +80,7 @@ FUNCTION(SETUP_TARGET_FOR_COVERAGE _targetname _testrunner _outputname)
 		# Capturing lcov counters and generating report
 		COMMAND ${LCOV_PATH} --directory . --capture --output-file ${_outputname}.info
 
-        COMMAND ${LCOV_PATH} --remove ${_outputname}.info '*/test/*' '/usr/*' '*/_deps/*' --output-file ${_outputname}.info.cleaned
+        COMMAND ${LCOV_PATH} --remove ${_outputname}.info '*/test/*' '/usr/*' '*/_deps/*' '*/libpw/RtAudio*' --output-file ${_outputname}.info.cleaned
 		COMMAND ${GENHTML_PATH} -o ${_outputname} ${_outputname}.info.cleaned
         COMMAND ${LCOV_PATH} --list ${_outputname}.info.cleaned
 		

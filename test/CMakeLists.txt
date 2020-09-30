@@ -38,6 +38,10 @@ else()
 	message(STATUS "Local environment")
 endif()
 
+if((${CMAKE_SYSTEM_NAME} MATCHES "Windows"))
+	add_definitions(-DWINDOWS)
+endif()
+
 add_executable(unit_tests "")
 
 add_custom_command(TARGET unit_tests PRE_BUILD

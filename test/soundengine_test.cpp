@@ -19,9 +19,13 @@
 #include "gtest/gtest.h"
 #include "soundengine.h"
 
+#if WINDOWS
+TEST(TestCaseDummy, TestDummy) {
+  ASSERT_EQ(0, 1-1);
+}
+#else
 TEST(TestCaseSoundEnginge, TestSoundEngine) {
-  // auto soundEngine = SoundEngine();
-  /*
+  auto soundEngine = SoundEngine();
   auto status = soundEngine.init("./pd");
 #ifdef CONTAINER_ENV
   ASSERT_EQ(EngineStatus::noSoundDevices, status);
@@ -33,5 +37,5 @@ TEST(TestCaseSoundEnginge, TestSoundEngine) {
       ASSERT_EQ(i, soundEngine.get("frequencyInput"));
   }
 #endif
-  */
 }
+#endif

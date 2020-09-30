@@ -23,7 +23,7 @@
 #endif
 #include <stdlib.h>
 
-AudioThread::AudioThread(QObject *parent) : engine(SoundEngine::instance()) {
+AudioThread::AudioThread(QObject *parent) {
 }
 
 void AudioThread::run() {

@@ -25,15 +25,11 @@ static int audioCallback(void *outputBuffer, void *inputBuffer,
                   unsigned int nBufferFrames, double streamTime,
                   RtAudioStreamStatus status, void *userData);
 
-SoundEngine& SoundEngine::instance() {
-    static SoundEngine instance;
-    return instance;
-}
-
 SoundEngine::SoundEngine() {
 }
 
 SoundEngine::~SoundEngine() {
+    if (audio.isStreamOpen()) audio.closeStream();
 }
 
 void SoundEngine::update() {

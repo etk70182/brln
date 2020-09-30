@@ -27,7 +27,6 @@ enum EngineStatus { ready, uninitialized, patchInvalid, noSoundDevices,
 
 class SoundEngine {
  public:
-    static SoundEngine& instance();
     SoundEngine();
     ~SoundEngine();
     void update();

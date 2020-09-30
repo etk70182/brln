@@ -25,6 +25,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow) {
     ui->setupUi(this);
+    this->setWindowTitle("BRLN");
     setWindowIcon(QIcon(":images/brln.png"));
     QDial* frequencyDial = this->findChild<QDial *>("frequencyDial");
     frequencyDial->setMaximum(0);
