@@ -1,7 +1,5 @@
 # set minimum cmake version
-cmake_minimum_required(VERSION 3.5 FATAL_ERROR)
-
-set(CMAKE_OSX_DEPLOYMENT_TARGET 10.13)
+cmake_minimum_required(VERSION 3.10 FATAL_ERROR)
 
 # project name and language
 project(brln 
@@ -10,7 +8,7 @@ project(brln
 )
 
 # require C++14
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 

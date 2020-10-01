@@ -26,7 +26,7 @@ jobs:
       run: mkdir install
       working-directory: ./build
     - name: Configuration on MacOS
-      run: cmake .. -DENABLE_UNIT_TESTS=OFF -DMACOS_BUNDLE_FORMAT=ON
+      run: cmake .. -DENABLE_UNIT_TESTS=OFF -DMACOS_BUNDLE_FORMAT=ON -DCMAKE_OSX_DEPLOYMENT_TARGET=10.13
       working-directory: ./build
       if: matrix.os == 'macos-latest'
     - name: Configuration on Ubuntu/Windows
