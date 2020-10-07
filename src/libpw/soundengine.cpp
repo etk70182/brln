@@ -74,27 +74,24 @@ EngineStatus SoundEngine::init(std::string const & patchDirectory) {
     RtAudio::StreamOptions options;
     options.streamName = "brln realtime stream";
     try {
-
-       auto audioCallback = []( void *outputBuffer,
-               void *inputBuffer,
-               unsigned int nFrames,
-               double streamTime,
-               RtAudioStreamStatus status,
-               void *userData ) -> int
-       {
-           // pass audio samples to/from libpd
-           int ticks = nFrames / 64;
-           bool processed = static_cast<pd::PdBase*>(userData)->processFloat(
-                       ticks,
-                       reinterpret_cast<float *>(inputBuffer),
-                       reinterpret_cast<float *>(outputBuffer));
-           return !static_cast<int>(processed);
-
-       };
-       audio.openStream(&parameters, NULL, RTAUDIO_FLOAT32,
+        auto audioCallback = [](void *outputBuffer,
+                void *inputBuffer,
+                unsigned int nFrames,
+                double streamTime,
+                RtAudioStreamStatus status,
+                void *userData) -> int {
+            // pass audio samples to/from libpd
+            int ticks = nFrames / 64;
+            bool processed = static_cast<pd::PdBase*>(userData)->processFloat(
+                    ticks,
+                    reinterpret_cast<float *>(inputBuffer),
+                    reinterpret_cast<float *>(outputBuffer));
+            return !static_cast<int>(processed);
+        };
+        audio.openStream(&parameters, NULL, RTAUDIO_FLOAT32,
                         sampleRate, &bufferFrames, audioCallback,
                         &lpd, &options);
-       audio.startStream();
+        audio.startStream();
     }
     catch(RtAudioError& e) {
        std::cerr << e.getMessage() << std::endl;
