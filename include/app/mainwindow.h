@@ -20,6 +20,7 @@
 #define INCLUDE_APP_MAINWINDOW_H_
 
 #include <QMainWindow>
+#include <memory>
 #include "audiothread.h"
 
 namespace Ui {
@@ -32,7 +33,7 @@ class MainWindow : public QMainWindow {
  public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
-    AudioThread *audioThread;
+    std::unique_ptr<AudioThread> audioThread;
 
  private:
     Ui::MainWindow *ui;

@@ -35,5 +35,6 @@ class SoundEngine {
     EngineStatus init(std::string const& patchDirectory);
  private:
     RtAudio audio;
+    pd::PdBase lpd;
     PatchSignalReceiver patchSignalReceiver;
 };

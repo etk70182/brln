@@ -18,6 +18,7 @@
  */
 #include "mainwindow.h"
 #include <QDial>
+#include <memory>
 #include "ui_mainwindow.h"
 
 
@@ -30,12 +31,13 @@ MainWindow::MainWindow(QWidget *parent) :
     QDial* frequencyDial = this->findChild<QDial *>("frequencyDial");
     frequencyDial->setMaximum(0);
     frequencyDial->setMaximum(127);
-    audioThread = new AudioThread(this);
+    audioThread = std::make_unique<AudioThread>(this);
     QObject::connect(frequencyDial, &QDial::valueChanged,
-                     audioThread, &AudioThread::setFrequency);
+                     audioThread.get(), &AudioThread::setFrequency);
     audioThread->start();
 }
 
 MainWindow::~MainWindow() {
+    audioThread->terminate();
     delete ui;
 }

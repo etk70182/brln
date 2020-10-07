@@ -20,11 +20,6 @@
 #include <functional>
 #include "PdBase.hpp"
 
-pd::PdBase lpd;
-static int audioCallback(void *outputBuffer, void *inputBuffer,
-                  unsigned int nBufferFrames, double streamTime,
-                  RtAudioStreamStatus status, void *userData);
-
 SoundEngine::SoundEngine() {
 }
 
@@ -79,9 +74,26 @@ EngineStatus SoundEngine::init(std::string const & patchDirectory) {
     RtAudio::StreamOptions options;
     options.streamName = "brln realtime stream";
     try {
+
+       auto audioCallback = []( void *outputBuffer,
+               void *inputBuffer,
+               unsigned int nFrames,
+               double streamTime,
+               RtAudioStreamStatus status,
+               void *userData ) -> int
+       {
+           // pass audio samples to/from libpd
+           int ticks = nFrames / 64;
+           bool processed = static_cast<pd::PdBase*>(userData)->processFloat(
+                       ticks,
+                       reinterpret_cast<float *>(inputBuffer),
+                       reinterpret_cast<float *>(outputBuffer));
+           return !static_cast<int>(processed);
+
+       };
        audio.openStream(&parameters, NULL, RTAUDIO_FLOAT32,
-                        sampleRate, &bufferFrames, &audioCallback,
-                        NULL, &options);
+                        sampleRate, &bufferFrames, audioCallback,
+                        &lpd, &options);
        audio.startStream();
     }
     catch(RtAudioError& e) {
@@ -90,15 +102,4 @@ EngineStatus SoundEngine::init(std::string const & patchDirectory) {
        return EngineStatus::thrownError;
     }
     return EngineStatus::ready;
-}
-
-int audioCallback(void *outputBuffer, void *inputBuffer,
-                  unsigned int nBufferFrames, double streamTime,
-                  RtAudioStreamStatus status, void *userData) {
-    // pass audio samples to/from libpd
-    int ticks = nBufferFrames / 64;
-    lpd.processFloat(ticks,
-                     reinterpret_cast<float *>(inputBuffer),
-                     reinterpret_cast<float *>(outputBuffer));
-    return 0;
 }
