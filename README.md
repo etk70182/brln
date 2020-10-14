@@ -13,7 +13,7 @@
 
 ### Introduction
 
-_brln_ is a free software synthesizer published under the GPL v3 license. _brln_ is implemented in C++14 and makes use of several libraries and frameworks such as [libpd](https://github.com/libpd/libpd/), [pure-data](https://github.com/pure-data/pure-data/), and [rtaudio](https://github.com/thestk/rtaudio) for the audio generation, [Qt](https://www.qt.io/) for the graphical user interface, and [googletest](https://github.com/google/googletest) for unit testing. This project makes use of [CMake](https://cmake.org/) to insure a consistent development experience for developers on Windows, MacOS, and Linux for building, testing and packaging the software. Also, this project follows the [Google's C++ style guide](https://google.github.io/styleguide/cppguide.html).
+_brln_ is a free software synthesizer published under the GPL v3 license. _brln_ is implemented in C++17 and makes use of several libraries and frameworks such as [libpd](https://github.com/libpd/libpd/), [pure-data](https://github.com/pure-data/pure-data/), and [rtaudio](https://github.com/thestk/rtaudio) for the audio generation, [Qt](https://www.qt.io/) for the graphical user interface, and [googletest](https://github.com/google/googletest) for unit testing. This project makes use of [CMake](https://cmake.org/) to insure a consistent development experience for developers on Windows, MacOS, and Linux for building, testing and packaging the software. Also, this project follows the [Google's C++ style guide](https://google.github.io/styleguide/cppguide.html).
 
 ![An image of the brln software synthesizer](/resources/images/screenshot.png?raw=true "Screenshot of BRLN")
 
